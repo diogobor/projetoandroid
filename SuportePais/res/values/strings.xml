@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hello">Hello World, Main!!!!!</string>
+    <string name="app_name">SuportePais</string>
+<string name="codigo">codigo</string>
+<string name="codigoAuxiliar">codigoAuxiliar</string>
+<string name="valor">valor</string>
+<string name="descricao">descricao</string>
+<string name="consulta">consulta</string>
+<string name="titulo.preencherosdadosdaconsulta">Preencher os dados da consulta</string>
+<string name="titulo.resultadodaconsultadepais">Resultado da consulta de pais</string>
+</resources>
