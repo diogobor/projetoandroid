@@ -1,10 +1,18 @@
 package br.gov.tutorial.view.cadastroPais.consultaPais.form;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 public class ConsultaPaisForm {
 	private String codigo;
 	private String codigoAuxiliar;
 	private String valor;
 	private String descricao;
+	private Collection paises;
+	
+	public ConsultaPaisForm(){
+		this.paises=new ArrayList();
+	}
 	public String getCodigo() {
 		return codigo;
 	}
@@ -28,6 +36,12 @@ public class ConsultaPaisForm {
 	}
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
+	}
+	public Collection getPaises() {
+		return paises;
+	}
+	public void setPaises(Collection paises) {
+		this.paises = paises;
 	}
 	
 }
