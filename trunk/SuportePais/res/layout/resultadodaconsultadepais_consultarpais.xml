@@ -2,6 +2,7 @@
 <LinearLayout
   xmlns:android="http://schemas.android.com/apk/res/android"
   android:orientation="vertical"
+  android:id="@+id/main"
   android:layout_width="fill_parent"
   android:layout_height="fill_parent">
   <TextView  
@@ -9,64 +10,24 @@
 		    android:layout_height="wrap_content" 
 		    android:text="@string/titulo.resultadodaconsultadepais"
 		/>
-  <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    >
-		<TextView  
-		    android:layout_width="wrap_content" 
-		    android:layout_height="wrap_content" 
-		    android:text="@string/codigo"
-		/>
-		<TextView android:layout_width="wrap_content" 
-		    android:layout_height="wrap_content" 
-		    android:id="@+id/codigo"
-		/>
-	</LinearLayout>
-	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    >
-		<TextView  
-		    android:layout_width="wrap_content" 
-		    android:layout_height="wrap_content" 
-		    android:text="@string/codigoAuxiliar"
-		/>
-		<TextView android:layout_width="wrap_content" 
-		    android:layout_height="wrap_content" 
-		    android:id="@+id/codigoAuxiliar"
-		/>
-	</LinearLayout>
-	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    >
-		<TextView  
-		    android:layout_width="wrap_content" 
-		    android:layout_height="wrap_content" 
-		    android:text="@string/valor"
-		/>
-		<TextView android:layout_width="wrap_content" 
-		    android:layout_height="wrap_content" 
-		    android:id="@+id/valor"
-		/>
-	</LinearLayout>
-	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    >
-		<TextView  
-		    android:layout_width="wrap_content" 
-		    android:layout_height="wrap_content" 
-		    android:text="@string/descricao"
-		/>
-		<TextView android:layout_width="wrap_content" 
-		    android:layout_height="wrap_content" 
-		    android:id="@+id/descricao"
-		/>
-	</LinearLayout> 
+  <TableLayout 
+			android:id="@+id/Tabela01" 
+			android:layout_width="fill_parent" 
+			android:layout_height="wrap_content">
+			<TableRow 
+				android:id="@+id/TableRow01" 
+				android:layout_width="fill_parent" 
+				android:layout_height="wrap_content">
+				<TextView  
+				    android:layout_width="wrap_content" 
+				    android:layout_height="wrap_content" 
+				    android:text="@string/codigo"
+				/>
+				<TextView  
+				    android:layout_width="wrap_content" 
+				    android:layout_height="wrap_content" 
+				    android:text="@string/valor"
+				/>
+			</TableRow>
+	</TableLayout>
 </LinearLayout>
