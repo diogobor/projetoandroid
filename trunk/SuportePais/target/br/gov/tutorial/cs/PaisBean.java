@@ -7,7 +7,13 @@ import br.gov.tutorial.controller.PaisDAO;
 import br.gov.tutorial.view.cadastroPais.consultaPais.form.ConsultaPaisForm;
 
 public abstract class PaisBean {
-	protected PaisDAO dao = new PaisDAO(ActivityHandler.atividade);
+	protected PaisDAO dao = null;
+	
+	public PaisBean(){
+		if (dao == null)
+			dao = new PaisDAO(ActivityHandler.atividade);
+	}
+	
 	public abstract Collection handleFilter(ConsultaPaisForm form);
 	public abstract void handleInsert(ConsultaPaisForm form);
 }

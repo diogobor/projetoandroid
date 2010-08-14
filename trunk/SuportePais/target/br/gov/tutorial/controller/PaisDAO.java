@@ -12,7 +12,7 @@ import br.gov.tutorial.cd.Pais;
 public class PaisDAO extends DataBase {	
 	
 	private static final String SCRIPT_DB_CREATE =  
-	       "create table pais (_id integer primary "+  
+	       "create table if not exists pais (_id integer primary "+  
 	       "key autoincrement, codigo text not null, "+  
 	       "codigoAuxiliar text not null, valor text not null,"+
 		   "descricao text not null);";
