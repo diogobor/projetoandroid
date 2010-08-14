@@ -1,6 +1,5 @@
 package br.gov.tutorial.controller;
 
-import br.gov.tutorial.SQLiteHelper;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
