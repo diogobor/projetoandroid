@@ -38,7 +38,7 @@ public abstract class ConsultaPaisControle {
 		}
 	};
 	public void iniciar(){
-		dao = new PaisDAO(ActivityHandler.atividade);
+		dao = new PaisDAO(ActivityHandler.atividade); // Temporario, o DAO nao ficara aqui ...
 		
 		ActivityHandler.atividade.setContentView(
 				R.layout.preenchaosdadosdaconsultadepais_consultarpais);
