@@ -18,7 +18,7 @@ import br.gov.tutorial.controller.PaisDAO;
 import br.gov.tutorial.view.cadastroPais.consultaPais.form.ConsultaPaisForm;
 
 public abstract class ConsultaPaisControle {
-	protected PaisDAO dao;
+	public PaisDAO dao;
 	protected OnClickListener btnConsulta = new OnClickListener(){
 		public void onClick(View v) {
 			ConsultaPaisForm form = new ConsultaPaisForm();
