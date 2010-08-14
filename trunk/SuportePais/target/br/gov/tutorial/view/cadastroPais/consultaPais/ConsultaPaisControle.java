@@ -51,6 +51,7 @@ public abstract class ConsultaPaisControle {
 		}
 		
 	}
+	public abstract Collection consultarPais(ConsultaPaisForm form);
 	
 	public void preencherGridPaises(Collection paises) throws Exception{
 		TableLayout t = ((TableLayout)ActivityHandler.atividade.findViewById(R.id.Tabela01));
@@ -86,5 +87,4 @@ public abstract class ConsultaPaisControle {
 		}
 	}
 	
-	public abstract Collection consultarPais(ConsultaPaisForm form);
 }
