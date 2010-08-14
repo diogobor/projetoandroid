@@ -2,9 +2,10 @@ package br.gov.tutorial.view.cadastroPais.consultaPais;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import android.util.Log;
-import br.gov.tutorial.cd.Pais;
+import br.gov.tutorial.cs.PaisBeanImpl;
 import br.gov.tutorial.view.cadastroPais.consultaPais.form.ConsultaPaisForm;
 
 
@@ -13,17 +14,14 @@ public class ConsultaPaisControleImpl extends ConsultaPaisControle{
 
 	@Override
 	public Collection consultarPais(ConsultaPaisForm form) {
-		// -- Nao faz parte desse metodo ---
-		Pais pais = new Pais();
-		pais.setCodigo(form.getCodigo());
-		pais.setCodigoAuxiliar(form.getCodigoAuxiliar());
-		pais.setDescricao(form.getDescricao());
-		pais.setValor(form.getValor());
 		
-		dao.inserir(pais);
+		PaisBeanImpl paisService = new PaisBeanImpl();
 		
-		// Termina aqui o inserir
+		//metodo teste de insercao
+		paisService.handleInsert(form);
+		
 		//Aqui chama um serviço para fazer a consulta
+		List result = (List) paisService.handleFilter(form);
 		Log.d("Application Debug", "Imprimindo campos");
 		Log.d(form.getClass().toString(), form.getCodigo());
 		Log.d(form.getClass().toString(), form.getCodigoAuxiliar());
