@@ -14,9 +14,11 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import br.gov.tutorial.ActivityHandler;
 import br.gov.tutorial.R;
+import br.gov.tutorial.controller.PaisDAO;
 import br.gov.tutorial.view.cadastroPais.consultaPais.form.ConsultaPaisForm;
 
 public abstract class ConsultaPaisControle {
+	protected PaisDAO dao;
 	protected OnClickListener btnConsulta = new OnClickListener(){
 		public void onClick(View v) {
 			ConsultaPaisForm form = new ConsultaPaisForm();
@@ -36,6 +38,8 @@ public abstract class ConsultaPaisControle {
 		}
 	};
 	public void iniciar(){
+		dao = new PaisDAO(ActivityHandler.atividade);
+		
 		ActivityHandler.atividade.setContentView(
 				R.layout.preenchaosdadosdaconsultadepais_consultarpais);
 		((Button) ActivityHandler.atividade.findViewById(R.id.consulta)).setOnClickListener(btnConsulta);
