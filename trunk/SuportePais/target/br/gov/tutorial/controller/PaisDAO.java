@@ -53,7 +53,7 @@ public class PaisDAO extends DataBase {
        String[] columns = new String[]{  
            "_id", "codigo", "codigoAuxiliar", "valor", "descricao"};  
        String[] args = new String[]{descricao+"%"};  
-       				 
+       
        Cursor c = db.query("pais", columns, "descricao like ?", args, null, null, null);  
  
        c.moveToFirst();  
