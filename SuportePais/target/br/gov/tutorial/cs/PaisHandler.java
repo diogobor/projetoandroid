@@ -3,17 +3,18 @@ package br.gov.tutorial.cs;
 import java.util.Collection;
 
 import br.gov.tutorial.ActivityHandler;
-import br.gov.tutorial.controller.PaisDAO;
-import br.gov.tutorial.view.cadastroPais.consultaPais.form.ConsultaPaisForm;
+import br.gov.tutorial.cd.PaisDAO;
+import br.gov.tutorial.cd.PaisDAOImpl;
+import br.gov.tutorial.vo.PaisVO;
 
 public abstract class PaisHandler {
-	protected PaisDAO dao = null;
+	protected PaisDAO paisDao = null;
 	
 	public PaisHandler(){
-		if (dao == null)
-			dao = new PaisDAO(ActivityHandler.atividade);
+		if (paisDao == null)
+			paisDao = new PaisDAOImpl(ActivityHandler.atividade);
 	}
 	
-	public abstract Collection handleFilter(ConsultaPaisForm form);
-	public abstract void handleInsert(ConsultaPaisForm form);
+	public abstract Collection handleFilter(PaisVO paisVO);
+	public abstract void handleInsert(PaisVO paisVO);
 }

@@ -1,6 +1,6 @@
 package br.gov.tutorial.cd;
 
-public class Pais {
+public abstract class Pais {
 	private long id;
 	private String codigo;
 	private String codigoAuxiliar;

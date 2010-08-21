@@ -7,7 +7,7 @@ public class DataBase {
 	
 	private static final String NOME_BANCO = "SuportePaisDB";
 	private static final int VERSAO_BANCO = 1;
-	SQLiteDatabase db;
+	protected SQLiteDatabase db;
 	SQLiteHelper dbHelper;
 	
 	public DataBase (Context ctx){  
@@ -16,8 +16,7 @@ public class DataBase {
 	}
 	
 	public void executeSQL(String sql){
-		dbHelper.insertSQL(sql,null);
-		dbHelper.onUpgrade(db, 1, 1);
+		dbHelper.insertSQL(db,sql);
 		db = dbHelper.getWritableDatabase();
 	}
 }
