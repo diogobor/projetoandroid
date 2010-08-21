@@ -6,7 +6,6 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class SQLiteHelper extends SQLiteOpenHelper {  
 	private String scriptCreate;  
-    private String scriptDelete;
     private String[] scriptsCreate;
   
     public SQLiteHelper(Context ctx, String nomeBd, int versaoBanco) {  
@@ -14,19 +13,17 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 		super(ctx, nomeBd, null, versaoBanco);  
     }
     
-    public void insertSQL(String scriptCreate, String scriptDelete){
+    public void insertSQL(SQLiteDatabase db, String scriptCreate){
 		this.scriptCreate = scriptCreate;  
-		this.scriptDelete = scriptDelete;  
+		onUpgrade(db,1,1);
     }
     
-    public void insertSQL(String[] scriptsCreate, String scriptDelete){
+    public void insertSQL(SQLiteDatabase db, String[] scriptsCreate){
 		this.scriptsCreate = scriptsCreate;  
-		this.scriptDelete = scriptDelete;  
+		onUpgrade(db,1,1);
     }
  
     public void onCreate(SQLiteDatabase db) {
-	   	if (scriptDelete != null)
-	   		db.execSQL(scriptDelete);
 	   	if (scriptCreate != null)
 	   		db.execSQL(scriptCreate); 
 	   	if (scriptsCreate != null)
@@ -38,8 +35,6 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     } 
  
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {  
-	   if (scriptDelete != null)
-	       db.execSQL(scriptDelete);  
 	   onCreate(db);  
     }  
 }  
