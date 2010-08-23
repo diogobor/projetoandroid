@@ -24,7 +24,7 @@ public abstract class PaisDAO extends DAO {
 	
 	public abstract long atualizar(Pais pais);
 	 
-    public abstract int excluir(int id); 
+    public abstract int excluir(long id); 
  
     public abstract List<Pais> buscarPais(PaisVO paisVO); 
  

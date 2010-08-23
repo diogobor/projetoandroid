@@ -17,4 +17,6 @@ public abstract class PaisHandler {
 	
 	public abstract Collection handleFilter(PaisVO paisVO);
 	public abstract void handleInsert(PaisVO paisVO);
+	public abstract void handleExcluir(PaisVO paisVO);
+	public abstract void handleAtualizar(PaisVO paisVO);
 }
