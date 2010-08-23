@@ -11,7 +11,7 @@ public class PaisHandlerImpl extends PaisHandler{
 
 	@Override
 	public Collection handleFilter(PaisVO paisVO) {
-		//Passar o pais vo para o buscar pais
+		
 		List listaPais = paisDao.buscarPais(paisVO);
 		return listaPais;
 	}
@@ -28,7 +28,21 @@ public class PaisHandlerImpl extends PaisHandler{
 		paisDao.inserir(pais);
 		
 	}
+	public void handleExcluir(PaisVO paisVO)
+	{
+		paisDao.excluir(paisVO.getId());
+	}
 
+	public void handleAtualizar(PaisVO paisVO)
+	{
+		Pais pais = new PaisImpl();
+		pais.setCodigo(paisVO.getCodigo());
+		pais.setCodigoAuxiliar(paisVO.getCodigoAuxiliar());
+		pais.setDescricao(paisVO.getDescricao());
+		pais.setValor(paisVO.getValor());
+		
+		paisDao.atualizar(pais);
+	}
 
 
 }

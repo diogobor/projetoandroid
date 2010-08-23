@@ -34,13 +34,14 @@ public class PaisDAOImpl extends PaisDAO {
 		           new String[]{ String.valueOf(pais.getId())});  
 		   }  
 		 
-	   public int excluir(int id){  
+	   public int excluir(long id){  
 	       return db.delete("pais", "_id = ?",   
 	           new String[]{ String.valueOf(id) });  
 	   }  
 	 
 	   public List<Pais> buscarPais(PaisVO paisVO){  
-
+		   //Inicia a transação
+		   db.beginTransaction();
 	       List<Pais> lista = new ArrayList<Pais>();  
 	 
 	       String[] columns = new String[]{  
@@ -59,6 +60,8 @@ public class PaisDAOImpl extends PaisDAO {
 	           lista.add(pais);  
 	           c.moveToNext();  
 	       }  
+	       db.setTransactionSuccessful();
+	       db.endTransaction();
 	       return lista;  
 	   }  
 	 
