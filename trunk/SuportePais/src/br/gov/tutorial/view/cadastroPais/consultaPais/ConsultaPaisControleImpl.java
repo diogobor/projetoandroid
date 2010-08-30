@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.List;
 
 import android.util.Log;
+import br.gov.tutorial.ActivityHandler;
 import br.gov.tutorial.cd.Pais;
 import br.gov.tutorial.cs.PaisHandler;
 import br.gov.tutorial.cs.PaisHandlerImpl;
@@ -18,7 +19,7 @@ public class ConsultaPaisControleImpl extends ConsultaPaisControle{
 	@Override
 	public Collection consultarPais(ConsultaPaisForm form) {
 		
-		PaisHandler paisService = new PaisHandlerImpl();
+		PaisHandler paisService = new PaisHandlerImpl(ActivityHandler.atividade);
 		
 		//metodo teste de insercao
 		PaisVO paisVo = new PaisVO();
