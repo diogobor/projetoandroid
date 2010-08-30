@@ -15,8 +15,24 @@ public abstract class PaisHandler {
 			paisDao = new PaisDAOImpl(ActivityHandler.atividade);
 	}
 	
-	public abstract Collection handleFilter(PaisVO paisVO);
-	public abstract void handleInsert(PaisVO paisVO);
-	public abstract void handleExcluir(PaisVO paisVO);
-	public abstract void handleAtualizar(PaisVO paisVO);
+	protected abstract Collection handleFilter(PaisVO paisVO);
+	protected abstract void handleInsert(PaisVO paisVO);
+	protected abstract void handleExcluir(PaisVO paisVO);
+	protected abstract void handleAtualizar(PaisVO paisVO);
+	
+	public void Filter(PaisVO paisVO){
+		
+		handleFilter(paisVO);
+		
+		
+	}
+	public void Insert(PaisVO paisVO){
+		handleInsert(paisVO);
+	}
+	public void Excluir(PaisVO paisVO){
+		handleExcluir(paisVO);
+	}
+	public void Atualizar(PaisVO paisVO){
+		handleAtualizar(paisVO);
+	}
 }
