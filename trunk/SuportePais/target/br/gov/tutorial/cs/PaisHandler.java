@@ -20,9 +20,9 @@ public abstract class PaisHandler {
 	protected abstract void handleExcluir(PaisVO paisVO);
 	protected abstract void handleAtualizar(PaisVO paisVO);
 	
-	public void Filter(PaisVO paisVO){
+	public Collection Filter(PaisVO paisVO){
 		
-		handleFilter(paisVO);
+		return handleFilter(paisVO);
 		
 		
 	}
