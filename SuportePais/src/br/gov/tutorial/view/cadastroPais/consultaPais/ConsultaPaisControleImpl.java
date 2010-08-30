@@ -29,7 +29,7 @@ public class ConsultaPaisControleImpl extends ConsultaPaisControle{
 		//paisService.handleInsert(paisVo);
 		
 		//Aqui chama um serviço para fazer a consulta
-		Collection<Pais> result = (Collection<Pais>) paisService.handleFilter(paisVo);
+		Collection<Pais> result = (Collection<Pais>) paisService.Filter(paisVo);
 
 		Log.d("Application Debug", "Banco de Dados");
 		for (Pais pais : result) {
