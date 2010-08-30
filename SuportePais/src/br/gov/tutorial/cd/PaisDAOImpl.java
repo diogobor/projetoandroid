@@ -40,8 +40,8 @@ public class PaisDAOImpl extends PaisDAO {
 	   }  
 	 
 	   public List<Pais> buscarPais(PaisVO paisVO){  
-		   //Inicia a transação
-		   db.beginTransaction();
+		   
+		   
 	       List<Pais> lista = new ArrayList<Pais>();  
 	 
 	       String[] columns = new String[]{  
@@ -60,8 +60,7 @@ public class PaisDAOImpl extends PaisDAO {
 	           lista.add(pais);  
 	           c.moveToNext();  
 	       }  
-	       db.setTransactionSuccessful();
-	       db.endTransaction();
+	      
 	       return lista;  
 	   }  
 	 
