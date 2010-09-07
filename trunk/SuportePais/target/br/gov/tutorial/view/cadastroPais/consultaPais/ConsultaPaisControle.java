@@ -14,12 +14,14 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import br.gov.tutorial.ActivityHandler;
 import br.gov.tutorial.R;
-import br.gov.tutorial.view.cadastroPais.consultaPais.form.ConsultaPaisForm;
+import br.gov.tutorial.view.cadastroPais.consultaPais.form.ConsultaPaisUCForm;
+import br.gov.tutorial.view.cadastroPais.detalhaPais.DetalhaPaisControleImpl;
+import br.gov.tutorial.view.cadastroPais.detalhaPais.DetalhaPaisControle;
 
 public abstract class ConsultaPaisControle {
 	protected OnClickListener btnConsulta = new OnClickListener(){
 		public void onClick(View v) {
-			ConsultaPaisForm form = new ConsultaPaisForm();
+			ConsultaPaisUCForm form = new ConsultaPaisUCForm();
 			
 			form.setCodigo(((EditText) ActivityHandler.atividade.findViewById(R.id.codigo)).getText().toString());
 			form.setCodigoAuxiliar(((EditText) ActivityHandler.atividade.findViewById(R.id.codigoAuxiliar)).getText().toString());
@@ -35,13 +37,18 @@ public abstract class ConsultaPaisControle {
 			preencherResultadoDaConsultaDePais(form);
 		}
 	};
-	public void iniciar(){		
+	public void iniciar(){
+		preInit();
 		ActivityHandler.atividade.setContentView(
 				R.layout.preenchaosdadosdaconsultadepais_consultarpais);
 		((Button) ActivityHandler.atividade.findViewById(R.id.consulta)).setOnClickListener(btnConsulta);
-		
+		posInit();
 	}
-	private void preencherResultadoDaConsultaDePais(ConsultaPaisForm form){
+	protected void preInit(){
+	}
+	protected void posInit(){
+	}
+	private void preencherResultadoDaConsultaDePais(ConsultaPaisUCForm form){
 		try {
 			preencherGridPaises(form.getPaises());
 		} catch (Exception e) {
@@ -51,7 +58,7 @@ public abstract class ConsultaPaisControle {
 		}
 		
 	}
-	public abstract Collection consultarPais(ConsultaPaisForm form);
+	public abstract Collection consultarPais(ConsultaPaisUCForm form);
 	
 	public void preencherGridPaises(Collection paises) throws Exception{
 		TableLayout t = ((TableLayout)ActivityHandler.atividade.findViewById(R.id.Tabela01));
@@ -74,7 +81,14 @@ public abstract class ConsultaPaisControle {
 				Object[]params=null;
 				TextView campo = new TextView(ActivityHandler.atividade);
 				campo.setText((String)getCodigo.invoke(pais, params));
-				coluna.addView(campo);				
+				coluna.addView(campo);
+				campo.setClickable(true);
+				campo.setOnClickListener(new OnClickListener(){
+					public void onClick(View v){
+						DetalhaPaisControle controle = new DetalhaPaisControleImpl();
+						controle.iniciar();
+					}
+				});
 			}
 			if(getValor!=null){
 				Object[]params=null;
