@@ -1,11 +1,14 @@
 package br.gov.tutorial.view.cadastroPais.consultaPais;
 
-import java.util.ArrayList;
 import java.util.Collection;
 
+import android.util.Log;
+import br.gov.tutorial.ActivityHandler;
 import br.gov.tutorial.cd.Pais;
-import br.gov.tutorial.cd.PaisImpl;
+import br.gov.tutorial.cs.PaisHandler;
+import br.gov.tutorial.cs.PaisHandlerImpl;
 import br.gov.tutorial.view.cadastroPais.consultaPais.form.ConsultaPaisUCForm;
+import br.gov.tutorial.vo.PaisVO;
 
 
 
@@ -13,36 +16,29 @@ public class ConsultaPaisControleImpl extends ConsultaPaisControle{
 
 	@Override
 	public Collection consultarPais(ConsultaPaisUCForm form) {
-		/*
-		PaisBeanImpl paisService = new PaisBeanImpl();
+		PaisHandler paisService = new PaisHandlerImpl(ActivityHandler.atividade);
 		
 		//metodo teste de insercao
-		paisService.handleInsert(form);
+		PaisVO paisVo = new PaisVO();
+		paisVo.setCodigo(form.getCodigo());
+		paisVo.setCodigoAuxiliar(form.getCodigoAuxiliar());
+		paisVo.setDescricao(form.getDescricao());
+		paisVo.setValor(form.getValor());
+		//paisService.handleInsert(paisVo);
 		
 		//Aqui chama um serviço para fazer a consulta
-		List result = (List) paisService.handleFilter(form);
-		Log.d("Application Debug", "Imprimindo campos");
-		Log.d(form.getClass().toString(), form.getCodigo());
-		Log.d(form.getClass().toString(), form.getCodigoAuxiliar());
-		Log.d(form.getClass().toString(), form.getValor());
-		Log.d(form.getClass().toString(), form.getDescricao());*/
-		Collection a = new ArrayList();
-		Pais p = new PaisImpl();
-		p.setCodigo("c");
-		p.setCodigoAuxiliar("ca");
-		p.setDescricao("d");
-		p.setValor("aa");
+		Collection<Pais> result = (Collection<Pais>) paisService.Filter(paisVo);
+
+		Log.d("Application Debug", "Banco de Dados");
+		for (Pais pais : result) {
+			Log.d("---- Pais ----", "---- Pais ----");
+			Log.d("Codigo Banco", pais.getCodigo());
+			Log.d("Codigo Auxiliar Banco", pais.getCodigoAuxiliar());
+			Log.d("Valor Banco", pais.getValor());
+			Log.d("Descricao Banco", pais.getDescricao());
+		}
 		
-		a.add(p);
-		
-		p = new PaisImpl();
-		p.setCodigo("c1");
-		p.setCodigoAuxiliar("ca1");
-		p.setDescricao("d1");
-		p.setValor("aa1");
-		
-		a.add(p);
- 		return a;
+		return result;
 		
 	}
 
