@@ -3,14 +3,14 @@ package br.gov.tutorial.view.cadastroPais.consultaPais.form;
 import java.util.ArrayList;
 import java.util.Collection;
 
-public class ConsultaPaisForm {
+public class ConsultaPaisUCForm {
 	private String codigo;
 	private String codigoAuxiliar;
 	private String valor;
 	private String descricao;
 	private Collection paises;
 	
-	public ConsultaPaisForm(){
+	public ConsultaPaisUCForm(){
 		this.paises=new ArrayList();
 	}
 	public String getCodigo() {
