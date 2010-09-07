@@ -14,25 +14,39 @@ public final class R {
         public static final int icon=0x7f020000;
     }
     public static final class id {
-        public static final int codigo=0x7f050000;
-        public static final int codigoAuxiliar=0x7f050001;
-        public static final int consulta=0x7f050004;
-        public static final int descricao=0x7f050003;
-        public static final int valor=0x7f050002;
+        public static final int Tabela01=0x7f06000d;
+        public static final int TableLayout01=0x7f060001;
+        public static final int TableRow01=0x7f060002;
+        public static final int TableRow02=0x7f060004;
+        public static final int TableRow03=0x7f060005;
+        public static final int TableRow04=0x7f060007;
+        public static final int TableRow05=0x7f06000b;
+        public static final int codigo=0x7f060003;
+        public static final int codigoAuxiliar=0x7f060006;
+        public static final int consulta=0x7f06000c;
+        public static final int descricao=0x7f06000a;
+        public static final int main=0x7f060000;
+        public static final int novaconsulta=0x7f060008;
+        public static final int valor=0x7f060009;
     }
     public static final class layout {
-        public static final int preenchaosdadosdaconsultadepais_consultarpais=0x7f030000;
-        public static final int resultadodaconsultadepais_consultarpais=0x7f030001;
+        public static final int detalhamentodopais_detalhapais=0x7f030000;
+        public static final int preenchaosdadosdaconsultadepais_consultarpais=0x7f030001;
+        public static final int resultadodaconsultadepais_consultarpais=0x7f030002;
     }
     public static final class string {
-        public static final int app_name=0x7f040001;
-        public static final int codigo=0x7f040002;
-        public static final int codigoAuxiliar=0x7f040003;
-        public static final int consulta=0x7f040006;
-        public static final int descricao=0x7f040005;
-        public static final int hello=0x7f040000;
-        public static final int titulo_preencherosdadosdaconsulta=0x7f040007;
-        public static final int titulo_resultadodaconsultadepais=0x7f040008;
-        public static final int valor=0x7f040004;
+        public static final int Nova_Consulta=0x7f050009;
+        public static final int app_name=0x7f050001;
+        public static final int codigo=0x7f050002;
+        public static final int codigoAuxiliar=0x7f050003;
+        public static final int consulta=0x7f050006;
+        public static final int descricao=0x7f050005;
+        public static final int hello=0x7f050000;
+        public static final int titulo_preencherosdadosdaconsulta=0x7f050007;
+        public static final int titulo_resultadodaconsultadepais=0x7f050008;
+        public static final int valor=0x7f050004;
+    }
+    public static final class style {
+        public static final int BotaoConsulta=0x7f040000;
     }
 }
