@@ -25,31 +25,27 @@ public abstract class PaisHandler extends DataBase{
 	protected abstract void handleAtualizar(PaisVO paisVO);
 	
 	public Collection Filter(PaisVO paisVO){
-		db.beginTransaction();
+		
 		List listaPais = (List) handleFilter(paisVO);
-		db.setTransactionSuccessful();
-		db.endTransaction();
+		
 		return listaPais;
 		
 		
 		
 	}
 	public void Insert(PaisVO paisVO){
-		db.beginTransaction();
+		
 		handleInsert(paisVO);
-		db.setTransactionSuccessful();
-		db.endTransaction();
+	
 	}
 	public void Excluir(PaisVO paisVO){
-		db.beginTransaction();
+	
 		handleExcluir(paisVO);
-		db.setTransactionSuccessful();
-		db.endTransaction();
+		
 	}
 	public void Atualizar(PaisVO paisVO){
-		db.beginTransaction();
+		
 		handleAtualizar(paisVO);
-		db.setTransactionSuccessful();
-		db.endTransaction();
+		
 	}
 }
