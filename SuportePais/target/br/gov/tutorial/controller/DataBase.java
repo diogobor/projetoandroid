@@ -7,7 +7,7 @@ public class DataBase {
 	
 	private static final String NOME_BANCO = "SuportePaisDB";
 	private static final int VERSAO_BANCO = 1;
-	protected SQLiteDatabase db;
+	protected static SQLiteDatabase db;
 	SQLiteHelper dbHelper;
 	
 	public DataBase (Context ctx){  
