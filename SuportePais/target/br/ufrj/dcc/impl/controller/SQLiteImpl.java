@@ -27,4 +27,16 @@ public class SQLiteImpl implements SQLite
 	public Cursor query(String table,String[] columns,String selection,String[] selectionArgs,String groupBy, String having,String orderBy){
 		return this.db.query(table, columns, selection, selectionArgs, groupBy, having, orderBy);
 	}
+	public void beginTransaction()
+	{
+		this.db.beginTransaction();
+	}
+	public void setTransactionSuccessful()
+	{
+		this.db.setTransactionSuccessful();
+	}
+	public void endTransaction()
+	{
+		this.db.endTransaction();
+	}
 }
