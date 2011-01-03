@@ -34,18 +34,21 @@ public abstract class PaisHandler extends DataBase{
 		
 	}
 	public void Insert(PaisVO paisVO){
-		
+		db.beginTransaction();
 		handleInsert(paisVO);
-	
+		db.setTransactionSuccessful();
+		db.endTransaction();
 	}
 	public void Excluir(PaisVO paisVO){
-	
+		db.beginTransaction();
 		handleExcluir(paisVO);
-		
+		db.setTransactionSuccessful();
+		db.endTransaction();
 	}
 	public void Atualizar(PaisVO paisVO){
-		
+		db.beginTransaction();
 		handleAtualizar(paisVO);
-		
+		db.setTransactionSuccessful();
+		db.endTransaction();
 	}
 }
