@@ -7,6 +7,10 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import br.gov.tutorial.vo.PaisVO;
+import br.ufrj.dcc.api.controller.PersistenceValues;
+import br.ufrj.dcc.api.controller.ResultDataBase;
+import br.ufrj.dcc.impl.controller.PersistenceValuesImpl;
+import br.ufrj.dcc.impl.controller.ResultDataBaseImpl;
 
 public class PaisDAOImpl extends PaisDAO {
 
@@ -21,7 +25,8 @@ public class PaisDAOImpl extends PaisDAO {
 	       cv.put("codigoAuxiliar", pais.getCodigoAuxiliar());  
 	       cv.put("valor", pais.getValor());
 	       cv.put("descricao", pais.getDescricao());
-	       return db.insert("pais", null, cv);  
+	       PersistenceValues pv = new PersistenceValuesImpl(cv);
+	       return db.insert("pais", null, pv);  
 		}
 		
 		public long atualizar(Pais pais){  
@@ -29,8 +34,9 @@ public class PaisDAOImpl extends PaisDAO {
 		       cv.put("codigo", pais.getCodigo());  
 		       cv.put("codigoAuxiliar", pais.getCodigoAuxiliar());  
 		       cv.put("valor", pais.getValor());
-		       cv.put("descricao", pais.getDescricao()); 
-		       return db.update("pais", cv, "_id = ?",   
+		       cv.put("descricao", pais.getDescricao());
+		       PersistenceValues pv = new PersistenceValuesImpl(cv);
+		       return db.update("pais", pv, "_id = ?",   
 		           new String[]{ String.valueOf(pais.getId())});  
 		   }  
 		 
@@ -52,8 +58,9 @@ public class PaisDAOImpl extends PaisDAO {
 	    		   paisVO.getCodigo()+"%", paisVO.getCodigoAuxiliar()+"%", paisVO.getValor()+"%", paisVO.getDescricao()+"%"
 	       };  
 	       
-	       Cursor c = db.query("pais", columns, "codigo like ? and codigoAuxiliar like ?  and valor like ? and descricao like ?", args, null, null, null);  
-	 
+	       ResultDataBase resultDB = db.query("pais", columns, "codigo like ? and codigoAuxiliar like ?  and valor like ? and descricao like ?", args, null, null, null);
+	       Cursor c = ((ResultDataBaseImpl)resultDB).getResultDataBase();
+	       
 	       c.moveToFirst();  
 	       while(!c.isAfterLast()){  
 	    	   Pais pais = fillPais(c);  
