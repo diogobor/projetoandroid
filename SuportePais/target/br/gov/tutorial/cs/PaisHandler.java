@@ -35,20 +35,35 @@ public abstract class PaisHandler extends DataBase{
 	}
 	public void Insert(PaisVO paisVO){
 		db.beginTransaction();
-		handleInsert(paisVO);
-		db.setTransactionSuccessful();
-		db.endTransaction();
+		try {
+			handleInsert(paisVO);
+			db.setTransactionSuccessful();
+		} catch (Exception e) {
+			System.out.println("Transaction Error: " + e.toString());
+		} finally {
+			db.endTransaction();
+		}		
 	}
 	public void Excluir(PaisVO paisVO){
 		db.beginTransaction();
-		handleExcluir(paisVO);
-		db.setTransactionSuccessful();
-		db.endTransaction();
+		try {
+			handleExcluir(paisVO);
+			db.setTransactionSuccessful();
+		} catch (Exception e) {
+			System.out.println("Transaction Error: " + e.toString());
+		} finally {
+			db.endTransaction();
+		}
 	}
 	public void Atualizar(PaisVO paisVO){
 		db.beginTransaction();
-		handleAtualizar(paisVO);
-		db.setTransactionSuccessful();
-		db.endTransaction();
+		try {
+			handleAtualizar(paisVO);
+			db.setTransactionSuccessful();
+		} catch (Exception e) {
+			System.out.println("Transaction Error: " + e.toString());
+		} finally {
+			db.endTransaction();
+		}
 	}
 }
