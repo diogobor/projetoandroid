@@ -1,8 +1,7 @@
 package br.ufrj.dcc.api.controller;
 
 public interface DatabaseHelper {
-	 public void insertSQL(android.database.sqlite.SQLiteDatabase db, String scriptCreate);
-	    
-	 public void insertSQL(android.database.sqlite.SQLiteDatabase db, String[] scriptsCreate);
+	 public void insertSQL(ConnDataBase db, String scriptCreate);  
+	 public void insertSQL(ConnDataBase db, String[] scriptsCreate);
 	 
 }
