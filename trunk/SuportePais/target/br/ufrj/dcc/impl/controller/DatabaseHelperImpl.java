@@ -1,10 +1,9 @@
 package br.ufrj.dcc.impl.controller;
 
-import br.ufrj.dcc.api.controller.DatabaseHelper;
-import br.ufrj.dcc.api.controller.SQLite;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import br.ufrj.dcc.api.controller.DatabaseHelper;
 
 
 public class DatabaseHelperImpl extends SQLiteOpenHelper implements DatabaseHelper{
@@ -33,21 +32,16 @@ public class DatabaseHelperImpl extends SQLiteOpenHelper implements DatabaseHelp
 		onCreate(db);  		
 	}
 	
-	 public void insertSQL(SQLite db, String scriptCreate){
+	 public void insertSQL(SQLiteDatabase db, String scriptCreate){
 			this.scriptCreate = scriptCreate;
-			SQLiteDatabase sqlite = (SQLiteDatabase) db;
+			SQLiteDatabase sqlite = db;
 			onUpgrade(sqlite,1,1);
 	    }
 	    
-	    public void insertSQL(SQLite db, String[] scriptsCreate){
+	    public void insertSQL(SQLiteDatabase db, String[] scriptsCreate){
 			this.scriptsCreate = scriptsCreate;  
-			SQLiteDatabase sqlite = (SQLiteDatabase) db;
+			SQLiteDatabase sqlite = db;
 			onUpgrade(sqlite,1,1);
-	    }
-	    
-	    public SQLiteDatabase getWritableDb(){
-	    	return this.getWritableDatabase();
-	    }
-	 
+	    }	 
 
 }
