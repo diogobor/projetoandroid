@@ -25,7 +25,7 @@ public class ConsultaPaisControleImpl extends ConsultaPaisControle{
 		paisVo.setCodigoAuxiliar(form.getCodigoAuxiliar());
 		paisVo.setDescricao(form.getDescricao());
 		paisVo.setValor(form.getValor());
-		//paisService.handleInsert(paisVo);
+		//paisService.Insert(paisVo);
 		
 		//Aqui chama um serviço para fazer a consulta
 		Collection<Pais> result = (Collection<Pais>) paisService.Filter(paisVo);
