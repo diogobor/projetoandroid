@@ -1,31 +1,33 @@
 package br.ufrj.dcc.impl.controller;
 
 import android.content.ContentValues;
-import android.database.Cursor;
+import br.ufrj.dcc.api.controller.PersistenceValues;
+import br.ufrj.dcc.api.controller.ResultDataBase;
 import br.ufrj.dcc.api.controller.SQLite;
 
 public class SQLiteImpl implements SQLite
 {
 	private android.database.sqlite.SQLiteDatabase db;
+	
 	public SQLiteImpl(android.database.sqlite.SQLiteDatabase db){
 		this.db = db;
 	}
-	
-	public Long insert(String table,String nullColumnHack,ContentValues value)
-	{
-		return this.db.insert(table, nullColumnHack, value);
+	public Long insert(String table, String nullColumnHack, PersistenceValues value) {
+		ContentValues contentValue = ((PersistenceValuesImpl)value).getPersistenceValues();
+		return this.db.insert(table, nullColumnHack, contentValue);
 	}
-	public int update(String table, ContentValues values,String whereClause, String[] whereArgs)
+	public int update(String table, PersistenceValues value,String whereClause, String[] whereArgs)
 	{
-		return this.db.update(table, values, whereClause, whereArgs);
+		ContentValues contentValue = ((PersistenceValuesImpl)value).getPersistenceValues();
+		return this.db.update(table, contentValue, whereClause, whereArgs);
 	}
 	public int delete(String table,String whereClause,String[] whereArgs)
 	{
 		return this.db.delete(table, whereClause, whereArgs);
 	}
-
-	public Cursor query(String table,String[] columns,String selection,String[] selectionArgs,String groupBy, String having,String orderBy){
-		return this.db.query(table, columns, selection, selectionArgs, groupBy, having, orderBy);
+	public ResultDataBase query(String table,String[] columns,String selection,String[] selectionArgs,String groupBy, String having,String orderBy){
+		ResultDataBase resultDB = new ResultDataBaseImpl(this.db.query(table, columns, selection, selectionArgs, groupBy, having, orderBy));
+		return resultDB;
 	}
 	public void beginTransaction()
 	{
