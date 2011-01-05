@@ -25,6 +25,9 @@ public class ButtonImpl implements Button{
 		this.action = action;
 		
 	}
+	public android.widget.Button getSource(){
+		return source;
+	}
 	
 
 }
