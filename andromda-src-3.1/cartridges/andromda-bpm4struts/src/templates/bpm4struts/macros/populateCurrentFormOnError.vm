@@ -1,0 +1,31 @@
+##
+## A shared macro that performs population of the previous form with 
+## the request parameters
+##
+## We populate the current form with only request parameters (we don't want the new
+## form set within the request, because we'll lose things like select lists, and any other
+## collections on the form)
+##
+#macro (populateCurrentFormOnError)
+            
+            Object formObj = ${servletPackage}.PageSessionObjectUtil.getPageForm(request, "${action.useCase.name}.${action.source.name}");
+            
+            if (formObj != null)
+            {
+                final java.util.Map parameters = new java.util.HashMap();
+                for (final java.util.Enumeration names = request.getParameterNames(); names.hasMoreElements();)
+                {
+                    final String name = String.valueOf(names.nextElement());
+##                    parameters.put(name, request.getParameter(name));
+                    parameters.put(name, request.getParameterValues(name));
+                }
+                try
+                {
+                    org.apache.commons.beanutils.BeanUtils.populate(formObj, parameters);
+                }
+                catch (java.lang.Exception populateException)
+                {
+                    // ignore if we have an exception here (we just don't populate).
+                }
+            }
+#end

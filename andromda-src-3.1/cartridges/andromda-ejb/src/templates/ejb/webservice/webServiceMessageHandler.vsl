@@ -1,0 +1,457 @@
+#if ($webServiceComAutenticacao.equalsIgnoreCase("true"))
+#if ($stringUtils.isNotBlank(${service.packageName}))
+package ${service.packageName};
+#end
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.lang.reflect.Method;
+import java.net.URL;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.security.PublicKey;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Properties;
+
+import javax.security.auth.Subject;
+import javax.security.auth.login.LoginContext;
+import javax.xml.namespace.QName;
+import javax.xml.rpc.JAXRPCException;
+import javax.xml.rpc.handler.GenericHandler;
+import javax.xml.rpc.handler.HandlerInfo;
+import javax.xml.rpc.handler.MessageContext;
+import javax.xml.rpc.handler.soap.SOAPMessageContext;
+import javax.xml.soap.SOAPBody;
+import javax.xml.soap.SOAPElement;
+import javax.xml.soap.SOAPEnvelope;
+import javax.xml.soap.SOAPException;
+import javax.xml.soap.SOAPHeader;
+import javax.xml.soap.SOAPMessage;
+import javax.xml.soap.SOAPPart;
+import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.codec.binary.Hex;
+
+import util.CriptoUtils;
+
+import accessControl.ControleAcesso;
+import accessControl.LoginCallbackHandler;
+import accessControl.PrincipalImpl;
+import accessControl.Servico;
+import accessControl.ServicosSingleton;
+import br.gov.controleacesso.cd.OperadorCa;
+import br.gov.controleacesso.cd.OperadorCaDAO;
+import br.gov.controleacesso.cd.OperadorCaDAOImpl;
+import br.gov.controleacesso.vo.OperadorCaVO;
+
+public class ${service.name}MessageHandler extends GenericHandler {
+	private static final long TEMPO_VALIDADE_TOKEN = 10000L;
+	private static final long TEMPO_EXPIRADO_TOKEN = 60000L;
+
+	private static final String URI_PASSWORD_DIGEST = "http://docs.oasis­-open.org/wss/2004/01/oasis-­200401-­wss­-username-­token-­profile-­1.0#PasswordDigest";
+	private static final String URI_PASSWORD_TEXT = "http://docs.oasis­-open.org/wss/2004/01/oasis-­200401-­wss­-username-­token-­profile-­1.0#PasswordText";
+
+	private static final String SIGNATURE_METHOD = "http://www.w3.org/2000/09/xmldsig#rsa-md5";
+	private static final String DIGEST_METHOD = "http://www.w3.org/2000/09/xmldsig#md5";
+
+	private static Map mapaChaveUnica = new HashMap();
+	
+	private static String MD_ALGORITHM = "MD5";
+    private static String DS_ALGORITHM = "MD5withRSA";
+    private static String DS_ALIAS = null;
+    private static String DS_PASSWORD = null;
+    private static File DS_CERTIFICATE = null;
+
+	private QName[] headers = null;
+
+	public QName[] getHeaders() {
+		return this.headers;
+	}
+
+	public void init(HandlerInfo handlerInfo) {
+		this.headers = handlerInfo.getHeaders();
+	}
+
+    public boolean handleRequest(MessageContext messageContext) {
+		Iterator headerIterator;
+		String nomeRecurso = "${service.packageName}.${service.name}BI";
+
+		/*
+		 * Recupera o cabeçalho da requisição SOAP
+		 */
+		try {
+			SOAPMessageContext soapMessageContext = (SOAPMessageContext) messageContext;
+			SOAPMessage soapMessage = soapMessageContext.getMessage();
+			SOAPPart soapPart = soapMessage.getSOAPPart();
+			SOAPEnvelope soapEnvelope = soapPart.getEnvelope();
+			SOAPHeader soapHeader = soapEnvelope.getHeader();
+			SOAPBody soapBody = soapEnvelope.getBody();
+
+			if (soapHeader == null || soapHeader.getChildElements() == null || !soapHeader.getChildElements().hasNext()) {
+				throw new JAXRPCException("Não há informações no cabeçalho da mensagem!");
+			}
+
+			headerIterator = soapHeader.extractAllHeaderElements();
+
+			// Recupera o nome do método solicitado
+			Iterator iteratorCorpo = soapBody.getChildElements();
+			SOAPElement element = (SOAPElement) iteratorCorpo.next();
+
+			nomeRecurso = this.getNomeRecurso(nomeRecurso, element.getNodeName());
+		} catch (SOAPException ex) {
+			throw new JAXRPCException(ex);
+		} catch (ClassNotFoundException ex) {
+			throw new JAXRPCException(ex);
+		}
+
+		/* <wsse:Security> */
+
+		// Recupera os elementos da tag <wsse:Security>
+		Iterator securityIterator = ((SOAPElement) headerIterator.next()).getChildElements();
+
+		// Recupera os elementos da tag <wsse:UsernameToken>
+		Iterator usernameTokenIterator = ((SOAPElement) securityIterator.next()).getChildElements();
+
+		// Recupera os dados da tag <wsse:Username>
+		String wsseUsername = this.getValor(usernameTokenIterator);
+
+		// Recupera os dados da tag <wsse:Password>
+		String[] wssePassword = this.getValor(usernameTokenIterator, new String[]{"Type"});
+
+		// Recupera os dados da tag <wsse:Nonce>
+		String wsseNonce = new String(Base64.decodeBase64(this.getValor(usernameTokenIterator).getBytes()));
+
+		// Recupera os dados da tag <wsu:Created>
+		String wsuCreated = this.getValor(usernameTokenIterator);
+
+		/* <ds:Signature> */
+
+		// Recupera os elementos da tag <ds:Signature>
+		Iterator signatureIterator = ((SOAPElement) securityIterator.next()).getChildElements();
+
+		// Recupera os elementos da tag <ds:SignatureInfo>
+		Iterator signatureInfoIterator = ((SOAPElement) signatureIterator.next()).getChildElements();
+
+		// Recupera os dados da tag <ds:SignatureMethod>
+		String[] dsSignatureMethod = this.getAttribute(signatureInfoIterator, new String[]{"Algorithm"});
+
+		// Recupera os elementos da tag <ds:Reference>
+		Iterator referenceIterator = ((SOAPElement) signatureInfoIterator.next()).getChildElements();
+
+		// Recupera os dados da tag <ds:DigestMethod>
+		String[] dsDigestMethod = this.getAttribute(referenceIterator, new String[]{"Algorithm"});
+
+		// Recupera os dados da tag <ds:DigestValue>
+		String dsDigestValue = this.getValor(referenceIterator);
+
+		// Recupera os dados da tag <ds:SignatureValue>
+		String dsSignatureValue = this.getValor(signatureIterator);
+
+		/*
+		 * Valida o formato da data de criação do cabeçalho
+		 */
+		Calendar dataToken = Calendar.getInstance();
+		long dataAvaliacao = dataToken.getTimeInMillis();
+
+		try {
+			DateFormat format = new SimpleDateFormat("yyyy­MM­dd'T'HH:mm:ss.SSS'Z'");
+			dataToken.setTime(format.parse(wsuCreated));
+            dataAvaliacao -= dataToken.getTimeInMillis();
+		} catch (ParseException ex) {
+			throw new JAXRPCException("Formato de data incompatível!", ex);
+		}
+
+		if (!dsSignatureMethod[0].equals(SIGNATURE_METHOD)) {
+			throw new JAXRPCException("Credenciais inválidas!");
+		}
+
+		if (!dsDigestMethod[0].equals(DIGEST_METHOD)) {
+			throw new JAXRPCException("Credenciais inválidas!");
+		}
+
+		if (dsSignatureValue != null)
+		{
+			Properties properties = new Properties();
+
+			try {
+				properties.load(new FileInputStream(new File((new URL(System.getProperty("jboss.server.config.url") + File.separator + "${projectId}-port.properties")).getFile())));
+
+				String value = properties.getProperty("message.digest.algorithm");
+				if (value != null) {
+					MD_ALGORITHM = value;
+				}
+
+				value = properties.getProperty("digital.signature.algorithm");
+				if (value != null) {
+					DS_ALGORITHM = value;
+				}
+
+				value = properties.getProperty("digital.signature.alias." + wsseUsername);
+				if (value != null) {
+					DS_ALIAS = value;
+				}
+
+				value = properties.getProperty("digital.signature.password." + wsseUsername);
+				if (value != null) {
+					DS_PASSWORD = value;
+				}
+
+				value = properties.getProperty("digital.signature.certificate.file." + wsseUsername);
+				if (value != null) {
+					DS_CERTIFICATE = new File(value);
+				}
+			} catch(java.io.IOException e) {
+			}
+
+			boolean assinaturaValida = false;
+
+			try {
+				PublicKey publicKey = CriptoUtils.getPublicKeyFromFile(DS_CERTIFICATE, DS_ALIAS, DS_PASSWORD);
+
+				assinaturaValida = CriptoUtils.verifySignature(publicKey, dsDigestValue.getBytes(), CriptoUtils.hexStringToByteArray(dsSignatureValue), DS_ALGORITHM);
+			} catch (Exception e) {
+				throw new JAXRPCException("Problema na validação da assinatura", e);
+			}
+
+			if (!assinaturaValida) {
+				throw new JAXRPCException("Assinatura inválida!");
+			}
+		}
+		else {
+			throw new JAXRPCException("Credenciais incompletas!");
+		}
+
+		/*
+		 * Gera o token interno conforme especifição OASIS Standards
+		 * para WS­Security baseado em UsernameToken.
+		 */
+		String senha = this.getPassword(wsseUsername);
+
+		/*
+		 * Utilizando senha sem encriptação
+		 */
+		if (URI_PASSWORD_TEXT.equals(wssePassword[1])) {
+			String senhaAcesso = null;
+
+			try {
+				senhaAcesso = new String(Hex.encodeHex(MessageDigest.getInstance("MD5").digest(wssePassword[0].getBytes())));
+			} catch (NoSuchAlgorithmException e) {
+				throw new JAXRPCException("Algotimo de encriptação não encontrado", e);
+			}
+
+			/*
+			 * 1a. Regra: A senha de acesso deve ser igual a cadastrada.
+			 */
+			if (!senha.equals(senhaAcesso)) {
+				throw new JAXRPCException("Credenciais inválidas!");
+			}
+		} else if (URI_PASSWORD_DIGEST.equals(wssePassword[1])) {
+			String tokenInterno = this.getUsernameToken(wsseNonce, wsuCreated, senha);
+
+			/*
+			 * 1a. Regra: A senha da requisição deverá ser igual ao token gerado internamente,
+			 * bem como o algoritmo deverá ser 'Password Digest'.
+			 */
+			if (!(tokenInterno.equals(wssePassword[0]))) {
+				throw new JAXRPCException("Credenciais inválidas!");
+			}
+		} else {
+			throw new JAXRPCException("Credenciais inválidas!");
+		}
+
+		/*
+		 * 2a. Regra: A chave única não poderá ter sido usada anteriormente.
+		 */
+		if (mapaChaveUnica.containsKey(wsseNonce)) {
+			throw new JAXRPCException("Credenciais já utilizadas!");
+		}
+
+		/*
+		 * 3a. Regra: O tempo de criação do token deverá ter um tempo curto de validade.
+		 */
+		if (dataAvaliacao > TEMPO_VALIDADE_TOKEN) {
+			throw new JAXRPCException("Credenciais expiradas!");
+		}
+
+		/*
+		 * 4a. Regra: Toda chave única utilizada deverá ser registrada com um tempo de
+		 * existência maior que o tempo de validade.
+		 */
+		mapaChaveUnica.put(wsseNonce, dataToken);
+		Object[] chavesUnicas = mapaChaveUnica.keySet().toArray();
+
+		// Remove as chaves únicas que excederam o tempo de existência.
+		for (int i = 0; i < chavesUnicas.length; i++) {
+			String token = (String) chavesUnicas[i];
+			Calendar data = (Calendar) mapaChaveUnica.get(token);
+
+			long tempo = Calendar.getInstance().getTimeInMillis() -	data.getTimeInMillis();
+
+			if (tempo > TEMPO_EXPIRADO_TOKEN) {
+				mapaChaveUnica.remove(token);
+			}
+		}
+
+		/*
+		 * 5a. Regra: O usuário deve possuir uma autorização
+		 * específica para acessar o método de serviço.
+		 */
+		// TODO: Funciona corretamente com senha não encriptada. Verificar forma alternativa.
+		this.autenticarUsuario(wsseUsername, wssePassword[0], nomeRecurso);
+
+		return true;
+    }
+
+	private String getNomeRecurso(String nomeClasse, String nomeMetodo) throws ClassNotFoundException {
+		if (nomeMetodo.indexOf(":") > 0) {
+			nomeMetodo = nomeMetodo.substring(nomeMetodo.indexOf(":") +1);
+		}
+
+		String nomeRecurso = nomeClasse.concat(".").concat(nomeMetodo).concat("(");
+		Class classe = Class.forName(nomeClasse);
+		for (Method metodo : classe.getMethods()) {
+			if (metodo.getName().equals(nomeMetodo)) {
+				Boolean primeiraOcorrencia = Boolean.TRUE;
+				for (Class parametro : metodo.getParameterTypes()) {
+					if (!primeiraOcorrencia) {
+						nomeRecurso = nomeRecurso.concat(", ");
+					}
+					nomeRecurso = nomeRecurso.concat(parametro.getName());
+					primeiraOcorrencia = Boolean.FALSE;
+				}
+			}
+		}
+
+		return nomeRecurso.concat(")");
+	}
+
+	private String getValor(Iterator iterator) {
+		return this.getValor(iterator, null)[0];
+	}
+
+	private String[] getValor(Iterator iterator, String[] atributos) {
+		if (!(iterator.hasNext())) {
+			throw new JAXRPCException("Credenciais incompletas!");
+		}
+
+		SOAPElement campo = (SOAPElement) iterator.next();
+		String valor = campo.getValue();
+		if (valor == null) {
+			throw new JAXRPCException("Credenciais incompletas!");
+		}
+		if (atributos == null) {
+			return new String[]{valor};
+		}
+		String[] retorno = new String[atributos.length + 1];
+
+		retorno[0] = valor;
+		for (int i = 0; i < atributos.length; i++) {
+			retorno[i + 1] = campo.getAttribute(atributos[i]);
+		}
+
+		return retorno;
+	}
+
+	private String[] getAttribute(Iterator iterator, String[] atributos) {
+		if (!(iterator.hasNext())) {
+			throw new JAXRPCException("Credenciais incompletas!");
+		}
+
+		SOAPElement campo = (SOAPElement) iterator.next();
+
+		if (atributos == null) {
+			throw new JAXRPCException("Credenciais incompletas!");
+		}
+
+		String[] retorno = new String[atributos.length];
+
+		for (int i = 0; i < atributos.length; i++) {
+			retorno[i] = campo.getAttribute(atributos[i]);
+		}
+
+		return retorno;
+	}
+
+	/*
+	 * Implementação do algoritmo para uso do WS­Security baseado em UsernameToken
+	 * (versão 1.0), conforme especificação da OASIS Standards (março/2004).
+	 *
+	 * PASSWORD_DIGEST = BASE64 ( SHA1 ( nonce + created + password ) )
+	 */
+	private String getUsernameToken(String wsseNonce, String wsuCreated, String wssePassword) {
+		String usernameToken = wsseNonce + wsuCreated + wssePassword;
+
+		try {
+			MessageDigest messageDigestSha1 = MessageDigest.getInstance("SHA-1");
+
+			return new String(Base64.encodeBase64(messageDigestSha1.digest(usernameToken.getBytes())));
+		} catch (NoSuchAlgorithmException ex) {
+			throw new JAXRPCException("Falha no algoritmo de segurança!", ex);
+		}
+	}
+
+	private String getPassword(String usuario) {
+		OperadorCaVO vo = new OperadorCaVO();
+		OperadorCaDAO dao = new OperadorCaDAOImpl();
+		vo.setLogin(usuario);
+		List usuarios;
+
+		try {
+			usuarios = dao.filter(vo, null);
+		} catch (Exception e1) {
+			usuarios = new ArrayList();
+		}
+
+		if (usuarios.isEmpty()) {
+			throw new JAXRPCException("Não foi encontrado um usuário no sistema com as credenciais informadas!");
+		}
+
+		OperadorCa opca = (OperadorCa) usuarios.get(0);
+
+		return opca.getSenha();
+    }
+
+	private void autenticarUsuario(String usuario, String senha, String recurso) {
+		LoginContext loginCtx;
+
+		try {
+			loginCtx = new LoginContext("${securityRealm}", new LoginCallbackHandler(usuario, senha));
+			loginCtx.login();
+		} catch (Exception ex) {
+			throw new JAXRPCException(ex);
+		}
+
+		HashMap servicos = ServicosSingleton.instance().getServicos();
+		HashMap mapServicos;
+
+		if (servicos == null) {
+			mapServicos = new HashMap();
+		} else {
+			mapServicos = (HashMap) servicos.get("${securityRealm}");
+		}
+
+		Subject subject = loginCtx.getSubject();
+		Servico servico = new Servico(recurso);
+
+		PrincipalImpl principalImpl = ControleAcesso.getCallerPrincipal(subject);
+		principalImpl.setNomeProjeto("${securityRealm}");
+
+		try {
+			if (ControleAcesso.verificaPermissao(subject, mapServicos, servico, true)) {
+				return;
+			}
+		} catch (Exception ex) {
+			throw new JAXRPCException(ex);
+		}
+
+		throw new JAXRPCException("Não há autorização para o usuário informado!");
+	}
+}
+#end
