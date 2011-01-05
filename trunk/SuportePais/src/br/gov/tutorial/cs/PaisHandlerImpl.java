@@ -3,15 +3,13 @@ package br.gov.tutorial.cs;
 import java.util.Collection;
 import java.util.List;
 
-import android.content.Context;
 import br.gov.tutorial.cd.Pais;
 import br.gov.tutorial.cd.PaisImpl;
 import br.gov.tutorial.vo.PaisVO;
 
 public class PaisHandlerImpl extends PaisHandler{
 
-	public PaisHandlerImpl(Context ctx) {
-		super(ctx);
+	public PaisHandlerImpl() {
 		// TODO Auto-generated constructor stub
 	}
 

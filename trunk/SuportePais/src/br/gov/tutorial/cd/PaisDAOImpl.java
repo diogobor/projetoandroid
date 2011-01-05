@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.content.ContentValues;
-import android.content.Context;
 import android.database.Cursor;
 import br.gov.tutorial.vo.PaisVO;
 import br.ufrj.dcc.api.controller.PersistenceValues;
@@ -14,8 +13,7 @@ import br.ufrj.dcc.impl.controller.ResultDataBaseImpl;
 
 public class PaisDAOImpl extends PaisDAO {
 
-	public PaisDAOImpl(Context ctx) {
-		super(ctx);
+	public PaisDAOImpl() {
 		// TODO Auto-generated constructor stub
 	}
 
