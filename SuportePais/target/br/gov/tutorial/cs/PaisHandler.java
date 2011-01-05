@@ -3,20 +3,17 @@ package br.gov.tutorial.cs;
 import java.util.Collection;
 import java.util.List;
 
-import android.content.Context;
 import br.gov.tutorial.cd.PaisDAO;
 import br.gov.tutorial.cd.PaisDAOImpl;
 import br.gov.tutorial.controller.DataBase;
 import br.gov.tutorial.vo.PaisVO;
-import br.ufrj.dcc.impl.ActivityHandler;
 
 public abstract class PaisHandler extends DataBase{
 	protected PaisDAO paisDao = null;
 	
-	public PaisHandler(Context ctx){
-		super(ctx);
+	public PaisHandler(){
 		if (paisDao == null)
-			paisDao = new PaisDAOImpl(ActivityHandler.activity);
+			paisDao = new PaisDAOImpl();
 	}
 	
 	protected abstract Collection handleFilter(PaisVO paisVO);
