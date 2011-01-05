@@ -1,12 +1,9 @@
 package br.gov.tutorial.view.cadastroPais.consultaPais;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 import android.util.Log;
 import br.gov.tutorial.cd.Pais;
-import br.gov.tutorial.cd.PaisImpl;
 import br.gov.tutorial.cs.PaisHandler;
 import br.gov.tutorial.cs.PaisHandlerImpl;
 import br.gov.tutorial.view.cadastroPais.consultaPais.form.ConsultaPaisUCForm;
@@ -19,7 +16,7 @@ public class ConsultaPaisControleImpl extends ConsultaPaisControle{
 
 	@Override
 	public Collection consultarPais(ConsultaPaisUCForm form) {
-		PaisHandler paisService = new PaisHandlerImpl(ActivityHandler.activity);
+		PaisHandler paisService = new PaisHandlerImpl();
 		PaisVO paisVo = new PaisVO();
 		paisVo.setCodigo(form.getCodigo());
 		paisVo.setCodigoAuxiliar(form.getCodigoAuxiliar());
