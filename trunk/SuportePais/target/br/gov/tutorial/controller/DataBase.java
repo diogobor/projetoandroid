@@ -1,9 +1,9 @@
 package br.gov.tutorial.controller;
 
-import android.content.Context;
 import br.ufrj.dcc.api.controller.ConnDataBase;
 import br.ufrj.dcc.api.controller.DatabaseHelper;
 import br.ufrj.dcc.api.controller.SQLite;
+import br.ufrj.dcc.impl.ActivityHandler;
 import br.ufrj.dcc.impl.controller.ConnDataBaseImpl;
 import br.ufrj.dcc.impl.controller.DatabaseHelperImpl;
 import br.ufrj.dcc.impl.controller.SQLiteImpl;
@@ -16,10 +16,10 @@ public class DataBase{
 	private ConnDataBase connDB;
 	protected static SQLite db;
 	
-	public DataBase (Context ctx){
+	public DataBase (){
 		if (dbHelper == null)
 		{
-			dbHelper = new DatabaseHelperImpl(ctx, NOME_BANCO, VERSAO_BANCO);
+			dbHelper = new DatabaseHelperImpl(ActivityHandler.activity, NOME_BANCO, VERSAO_BANCO);
 		}
 		if (db == null) 
 		{

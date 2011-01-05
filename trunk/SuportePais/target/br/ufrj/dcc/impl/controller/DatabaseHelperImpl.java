@@ -1,19 +1,17 @@
 package br.ufrj.dcc.impl.controller;
 
-import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import br.ufrj.dcc.api.controller.ConnDataBase;
 import br.ufrj.dcc.api.controller.DatabaseHelper;
-
 
 public class DatabaseHelperImpl extends SQLiteOpenHelper implements DatabaseHelper{
 	
 	private String scriptCreate;  
     private String[] scriptsCreate;
     
-	public DatabaseHelperImpl(Context context, String dbName,int dbVersion) {
-		super(context, dbName,null, dbVersion);
+    public DatabaseHelperImpl(android.content.Context activity, String dbName,int dbVersion) {
+		super(activity, dbName,null, dbVersion);		
 	}
 
 	@Override
