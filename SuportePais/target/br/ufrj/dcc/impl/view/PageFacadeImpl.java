@@ -32,13 +32,11 @@ public class PageFacadeImpl implements PageFacade{
 	}
 
 
-	@Override
 	public void changePage(String id) {
 		ActivityHandler.activity.setContentView(Integer.parseInt(id));
 	}
 
 
-	@Override
 	public void showErrorMessage(String message) {
 		AlertDialog.Builder builder = new AlertDialog.Builder(ActivityHandler.activity);
 		builder.setMessage(message).setNeutralButton("Ok", new DialogInterface.OnClickListener() {
@@ -48,7 +46,6 @@ public class PageFacadeImpl implements PageFacade{
 	}
 
 
-	@Override
 	public void createTable(String id ,Collection elements,Collection buttons, String ... fields) throws Exception {
 		TableLayout t = ((TableLayout)ActivityHandler.activity.findViewById(Integer.parseInt(id)));
 		for(Object element : elements){
