@@ -21,12 +21,25 @@ public class ButtonImpl implements Button{
 		this.source.setOnClickListener(listener);
 	}
 	
-	public void setAction(ActionCommander action) {
+	public void setAction(final ActionCommander action) {
 		this.action = action;
+		OnClickListener listener = new OnClickListener(){
+			public void onClick(View v) {
+				action.action();
+			}
+		};
+		this.source.setOnClickListener(listener);
 		
 	}
 	public android.widget.Button getSource(){
 		return source;
+	}
+	public String getText() {
+		return source.getText().toString();
+	}
+	@Override
+	public ActionCommander getAction() {
+		return action;
 	}
 	
 

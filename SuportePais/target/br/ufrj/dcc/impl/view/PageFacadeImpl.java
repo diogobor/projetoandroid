@@ -1,6 +1,5 @@
 package br.ufrj.dcc.impl.view;
 
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Collection;
 
@@ -12,8 +11,7 @@ import android.widget.EditText;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
-import br.gov.tutorial.view.cadastroPais.detalhaPais.DetalhaPaisControle;
-import br.gov.tutorial.view.cadastroPais.detalhaPais.DetalhaPaisControleImpl;
+import br.ufrj.dcc.api.view.ActionCommander;
 import br.ufrj.dcc.api.view.Button;
 import br.ufrj.dcc.api.view.InputText;
 import br.ufrj.dcc.api.view.PageFacade;
@@ -32,11 +30,13 @@ public class PageFacadeImpl implements PageFacade{
 	}
 
 
+	@Override
 	public void changePage(String id) {
 		ActivityHandler.activity.setContentView(Integer.parseInt(id));
 	}
 
 
+	@Override
 	public void showErrorMessage(String message) {
 		AlertDialog.Builder builder = new AlertDialog.Builder(ActivityHandler.activity);
 		builder.setMessage(message).setNeutralButton("Ok", new DialogInterface.OnClickListener() {
@@ -46,8 +46,9 @@ public class PageFacadeImpl implements PageFacade{
 	}
 
 
-	public void createTable(String id ,Collection elements,Collection buttons, String ... fields) throws Exception {
-		TableLayout t = ((TableLayout)ActivityHandler.activity.findViewById(Integer.parseInt(id)));
+	@Override
+	public void createTable(String tableId ,Collection elements,Collection<Button> buttons, String ... fields) throws Exception {
+		TableLayout t = ((TableLayout)ActivityHandler.activity.findViewById(Integer.parseInt(tableId)));
 		for(Object element : elements){
 			//TODO
 			TableRow row = new TableRow(ActivityHandler.activity);
@@ -64,20 +65,27 @@ public class PageFacadeImpl implements PageFacade{
 			for(int i=0;i<getters.length;i++){
 				if(getters[i]!=null){
 					Object[]params=null;
-					//TODO Adicionar o caso onde eu quero botões
 					TextView campo=new TextView(ActivityHandler.activity);
 					campo.setText((String)getters[i].invoke(element, params));
 					row.addView(campo);
 				}
 			}
 			if(buttons!=null){
-				for(Object button : buttons){
-					row.addView(((ButtonImpl)button).getSource());
+				for(Button button : buttons){
+					ButtonImpl but = (ButtonImpl)createButton(button.getText());
+					but.setAction(button.getAction());
+					row.addView(but.getSource());
 				}
 			}
 			t.addView(row);
 		}
 		
+	}
+	
+	public Button createButton(String label){
+		android.widget.Button source = new android.widget.Button(ActivityHandler.activity);
+		source.setText(label);
+		return new ButtonImpl(source);
 	}
 	private static String capitalize(String s) {
         if (s.length() == 0) return s;

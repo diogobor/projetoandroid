@@ -1,27 +1,25 @@
 package br.gov.tutorial.view.cadastroPais.detalhaPais;
 
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Button;
 import br.gov.tutorial.R;
 import br.gov.tutorial.view.cadastroPais.detalhaPais.form.DetalhaPaisUCForm;
-import br.ufrj.dcc.impl.ActivityHandler;
+import br.ufrj.dcc.api.view.ActionCommander;
+import br.ufrj.dcc.api.view.PageFacade;
+import br.ufrj.dcc.impl.view.PageFacadeImpl;
 
 public abstract class DetalhaPaisControle {
-	protected OnClickListener btnNovaConsulta = new OnClickListener(){
-		public void onClick(View v) {
-			//TODO
-			ActivityHandler.activity.setContentView(
-					R.layout.preenchaosdadosdaconsultadepais_consultarpais);
+	private ActionCommander btnNovaConsulta = new ActionCommander(){
+		public void action() {
+			PageFacade page = new PageFacadeImpl();
+			page.changePage(String.valueOf(R.layout.preenchaosdadosdaconsultadepais_consultarpais));
 		}
+		
 	};
+
 	public void iniciar(){
 		preInit();
-		//TODO
-		ActivityHandler.activity.setContentView(
-				R.layout.detalhamentodopais_detalhapais);
-		//TODO
-		((Button) ActivityHandler.activity.findViewById(R.id.novaconsulta)).setOnClickListener(btnNovaConsulta);
+		PageFacade page = new PageFacadeImpl();
+		page.changePage(String.valueOf(R.layout.detalhamentodopais_detalhapais));
+		page.getButton(String.valueOf(R.id.novaconsulta)).setAction(btnNovaConsulta);
 		recuperaPais(new DetalhaPaisUCForm());
 		posInit();
 	}
