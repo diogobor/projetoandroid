@@ -1,0 +1,37 @@
+#set ($generatedFile = "Database.java")
+package $customTypesPackage.${controllerPackageName};
+#set ($generatedFile = "${stringUtils.replace($customTypesPackage,'.','/')}/${controllerPackageName}/${generatedFile}")
+
+import br.ufrj.dcc.api.controller.ConnDataBase;
+import br.ufrj.dcc.api.controller.DatabaseHelper;
+import br.ufrj.dcc.api.controller.SQLite;
+import br.ufrj.dcc.impl.ActivityHandler;
+import br.ufrj.dcc.impl.controller.ConnDataBaseImpl;
+import br.ufrj.dcc.impl.controller.DatabaseHelperImpl;
+import br.ufrj.dcc.impl.controller.SQLiteImpl;
+
+public class DataBase{
+	
+	private static final String SCHEMA_DATABASE = "${schemaDataBase}";
+	private static final int DATABASE_VERSION = ${dataBaseVersion};
+	private DatabaseHelper dbHelper;
+	private ConnDataBase connDB;
+	protected static SQLite db;
+	
+	public DataBase (){
+		if (dbHelper == null)
+		{
+			dbHelper = new DatabaseHelperImpl(ActivityHandler.activity, SCHEMA_DATABASE, DATABASE_VERSION);
+		}
+		if (db == null) 
+		{
+			db = new SQLiteImpl(((DatabaseHelperImpl)dbHelper).getWritableDatabase());
+		}
+	}
+	
+	public void executeSQL(String sql){
+		connDB = new ConnDataBaseImpl(((DatabaseHelperImpl)dbHelper).getWritableDatabase());
+		dbHelper.insertSQL(connDB,sql);
+		db = new SQLiteImpl(((DatabaseHelperImpl)dbHelper).getWritableDatabase());
+	}
+}
