@@ -5,13 +5,10 @@ import java.util.Collection;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.EditText;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
-import br.ufrj.dcc.api.view.ActionCommander;
 import br.ufrj.dcc.api.view.Button;
 import br.ufrj.dcc.api.view.InputText;
 import br.ufrj.dcc.api.view.PageFacade;
@@ -30,13 +27,11 @@ public class PageFacadeImpl implements PageFacade{
 	}
 
 
-	@Override
 	public void changePage(String id) {
 		ActivityHandler.activity.setContentView(Integer.parseInt(id));
 	}
 
 
-	@Override
 	public void showErrorMessage(String message) {
 		AlertDialog.Builder builder = new AlertDialog.Builder(ActivityHandler.activity);
 		builder.setMessage(message).setNeutralButton("Ok", new DialogInterface.OnClickListener() {
@@ -45,8 +40,6 @@ public class PageFacadeImpl implements PageFacade{
 		
 	}
 
-
-	@Override
 	public void createTable(String tableId ,Collection elements,Collection<Button> buttons, String ... fields) throws Exception {
 		TableLayout t = ((TableLayout)ActivityHandler.activity.findViewById(Integer.parseInt(tableId)));
 		for(Object element : elements){
