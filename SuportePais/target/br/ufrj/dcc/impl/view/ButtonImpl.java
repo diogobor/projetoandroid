@@ -37,7 +37,7 @@ public class ButtonImpl implements Button{
 	public String getText() {
 		return source.getText().toString();
 	}
-	@Override
+
 	public ActionCommander getAction() {
 		return action;
 	}
