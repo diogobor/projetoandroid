@@ -151,5 +151,6 @@
         <module>andromda-webservice</module>
         <module>andromda-xmlschema</module>
         <module>testsuite</module>
+        <module>andromda-android</module>
     </modules>
 </project>
