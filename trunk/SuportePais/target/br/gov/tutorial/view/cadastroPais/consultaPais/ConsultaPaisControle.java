@@ -1,10 +1,14 @@
 package br.gov.tutorial.view.cadastroPais.consultaPais;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import br.gov.tutorial.R;
 import br.gov.tutorial.view.cadastroPais.consultaPais.form.ConsultaPaisUCForm;
+import br.gov.tutorial.view.cadastroPais.detalhaPais.DetalhaPaisControle;
+import br.gov.tutorial.view.cadastroPais.detalhaPais.DetalhaPaisControleImpl;
 import br.ufrj.dcc.api.view.ActionCommander;
+import br.ufrj.dcc.api.view.Button;
 import br.ufrj.dcc.api.view.PageFacade;
 import br.ufrj.dcc.impl.view.PageFacadeImpl;
 
@@ -57,53 +61,20 @@ public abstract class ConsultaPaisControle {
 	public void preencherGridPaises(Collection paises) throws Exception{
 		//TODO
 		PageFacade page = new PageFacadeImpl();
+		Collection<Button> botoes = new ArrayList<Button>();
+		Button button = page.createButton("detalhar");
+		botoes.add(button);
+		button.setAction(new ActionCommander(){
+			public void action() {
+				// TODO Auto-generated method stub
+				DetalhaPaisControle controle = new DetalhaPaisControleImpl();
+				controle.iniciar();
+			}
+			
+		});
 		page.createTable(String.valueOf(R.id.Tabela01)
-				, paises, null, "valor","codigo");
-		
-		/*
-		TableLayout t = ((TableLayout)ActivityHandler.activity.findViewById(R.id.Tabela01));
-		for(Object pais : paises){
-			//TODO
-			
-			TableRow coluna = new TableRow(ActivityHandler.activity);
-			
-			Method[] metodos  = pais.getClass().getMethods();
-			Method getValor=null;
-			Method getCodigo=null;
-			
-			for(int i=0;i<metodos.length;i++){
-				if(metodos[i].getName().endsWith("getValor")){
-					getValor = metodos[i];
-				}else{
-					if(metodos[i].getName().endsWith("getCodigo")){
-						getCodigo=metodos[i];
-					}
-				}
-			}
-			if(getCodigo!=null){
-				Object[]params=null;
-				//TODO
-				TextView campo = new TextView(ActivityHandler.activity);
-				campo.setText((String)getCodigo.invoke(pais, params));
-				coluna.addView(campo);
-				campo.setClickable(true);
-				campo.setOnClickListener(new OnClickListener(){
-					public void onClick(View v){
-						DetalhaPaisControle controle = new DetalhaPaisControleImpl();
-						controle.iniciar();
-					}
-				});
-			}
-			if(getValor!=null){
-				Object[]params=null;
-				//TODO
-				TextView campo = new TextView(ActivityHandler.activity);
-				campo.setText((String)getValor.invoke(pais, params));
-				coluna.addView(campo);				
-			}
-			
-			t.addView(coluna);
-		}*/
+				, paises, botoes, "valor","codigo");
+
 	}
 	
 }

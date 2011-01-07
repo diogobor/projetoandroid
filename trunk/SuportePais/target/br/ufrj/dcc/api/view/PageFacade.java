@@ -7,5 +7,6 @@ public interface PageFacade {
 	public Button getButton(String id);
 	public void changePage(String id);
 	public void showErrorMessage(String message);
-	public void createTable(String id ,Collection elements,Collection Buttons, String ... fields)throws Exception;
+	public void createTable(String tableId ,Collection elements,Collection<Button> Buttons, String ... fields)throws Exception;
+	public Button createButton(String label);
 }
