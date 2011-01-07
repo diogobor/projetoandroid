@@ -1,3 +1,0 @@
-<jboss-web>
-	<context-root>/${projectId}/layout</context-root>
-</jboss-web>
