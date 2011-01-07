@@ -1,0 +1,27 @@
+#set ($generatedFile = "AbstractWS.java")
+#if($stringUtils.isNotEmpty($customTypesPackage))
+package $customTypesPackage.${wsdPackageName};
+#set ($generatedFile = "${stringUtils.replace($customTypesPackage,'.','/')}/${wsdPackageName}/${generatedFile}")
+#end
+
+#if($jboss403 == 'false')
+import javax.xml.bind.annotation.XmlType;
+#set($specific = $hibernateUtils.moreSpecificPackageName("${customTypesPackage}"))
+@XmlType(name = "AbstractWS", namespace = "http://$specific/types")
+#end
+public abstract class AbstractWS implements java.io.Serializable{
+	public abstract Long getId();
+	
+	#if($jboss403 == 'false')
+	#set($webServiceDatas = ${hibernateUtils.getWebServiceData()})
+	#foreach($webServiceData in $webServiceDatas)
+	#set($package = $webServiceData.package.fullyQualifiedName)
+	#if($stringUtils.indexOf("$package", "$modelPackageName") > 0)
+	#set($package = $stringUtils.replace("${package}", "$modelPackageName", "$wsdPackageName"))
+	#set($package = $package.concat("."))
+	#set($name = $package.concat("${webServiceData.name}WS"))
+	public $name $webServiceData.name;
+	#end
+	#end
+	#end
+}

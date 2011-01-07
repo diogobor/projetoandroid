@@ -1,0 +1,37 @@
+#if ($stringUtils.isNotBlank($service.packageName))
+package $service.packageName;
+#end
+import java.rmi.Remote;
+import java.rmi.RemoteException;
+#if($service.jaxws)
+import javax.jws.WebService;
+import javax.jws.soap.SOAPBinding;
+import org.jboss.ws.annotation.WebContext;
+#end
+
+/**
+$service.getDocumentation(" * ")
+ */
+ #if($service.jaxws) 
+@WebService(targetNamespace = "${service.targetNamespace}")
+@SOAPBinding(style = SOAPBinding.Style.RPC)
+#end
+public interface ${service.name}Srv extends Remote{
+
+#foreach ($operation in $service.operations)
+	/**
+	  $operation.getDocumentation("    * ")
+	    */
+	  
+#set ($listaAtributos = '')
+#set ($return = '')
+#renderReturnWS($operation $return)
+#if($operation.returnType.collectionType || $operation.returnType.listType || $operation.returnType.setType )
+#renderParametersWSPaginacao($operation $listaAtributos true)
+#else
+#renderParametersWS($operation $listaAtributos true)
+#end
+$operation.visibility $return ${operation.name} ($listaAtributos) throws RemoteException;
+
+#end
+}
