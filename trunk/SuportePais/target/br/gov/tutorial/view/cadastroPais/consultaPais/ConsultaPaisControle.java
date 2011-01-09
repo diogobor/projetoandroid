@@ -17,7 +17,7 @@ public abstract class ConsultaPaisControle {
 		public void action() {
 			ConsultaPaisUCForm form = new ConsultaPaisUCForm();
 			PageFacade page = new PageFacadeImpl();
-			//TODO utilizar reflection na implementação pra pegar o id
+
 			form.setCodigo(page.getInputText(String.valueOf(R.id.codigo)).getValue());
 			form.setCodigoAuxiliar(page.getInputText(String.valueOf(R.id.codigoAuxiliar)).getValue());
 			form.setDescricao(page.getInputText(String.valueOf(R.id.descricao)).getValue());
@@ -25,7 +25,6 @@ public abstract class ConsultaPaisControle {
 			
 			form.setPaises(consultarPais(form));
 			
-			//TODO utilizar reflection na implementação pra pegar o id
 			page.changePage(String.valueOf(
 					R.layout.resultadodaconsultadepais_consultarpais));
 			
@@ -36,7 +35,7 @@ public abstract class ConsultaPaisControle {
 	public void iniciar(){
 		preInit();
 		PageFacade page = new PageFacadeImpl();
-		//TODO utilizar reflection na implementação pra pegar o id
+		
 		page.changePage(String.valueOf(
 				R.layout.preenchaosdadosdaconsultadepais_consultarpais));
 		page.getButton(String.valueOf(R.id.consulta)).setAction(btnConsulta);
@@ -66,7 +65,6 @@ public abstract class ConsultaPaisControle {
 		botoes.add(button);
 		button.setAction(new ActionCommander(){
 			public void action() {
-				// TODO Auto-generated method stub
 				DetalhaPaisControle controle = new DetalhaPaisControleImpl();
 				controle.iniciar();
 			}

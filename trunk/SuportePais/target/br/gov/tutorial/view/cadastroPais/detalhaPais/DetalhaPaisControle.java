@@ -20,7 +20,12 @@ public abstract class DetalhaPaisControle {
 		PageFacade page = new PageFacadeImpl();
 		page.changePage(String.valueOf(R.layout.detalhamentodopais_detalhapais));
 		page.getButton(String.valueOf(R.id.novaconsulta)).setAction(btnNovaConsulta);
-		recuperaPais(new DetalhaPaisUCForm());
+		DetalhaPaisUCForm form =new DetalhaPaisUCForm();
+		recuperaPais(form);
+		page.setLabel(String.valueOf(R.id.codigo), form.getCodigo());
+		page.setLabel(String.valueOf(R.id.codigoAuxiliar), form.getCodigoAuxiliar());
+		page.setLabel(String.valueOf(R.id.descricao), form.getDescricao());
+		page.setLabel(String.valueOf(R.id.valor), form.getValor());
 		posInit();
 	}
 	protected void preInit(){
