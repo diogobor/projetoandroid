@@ -13,8 +13,8 @@ public abstract class PaisHandler extends DataBase{
 	
 	protected abstract Collection handleFilter(PaisVO paisVO);
 	protected abstract void handleInsert(PaisVO paisVO);
-	protected abstract void handleExcluir(PaisVO paisVO);
-	protected abstract void handleAtualizar(PaisVO paisVO);
+	protected abstract void handleDelete(PaisVO paisVO);
+	protected abstract void handleUpdate(PaisVO paisVO);
 	
 	public PaisHandler(){
 		if (paisDao == null)
@@ -35,10 +35,10 @@ public abstract class PaisHandler extends DataBase{
 			db.endTransaction();
 		}		
 	}
-	public void Excluir(PaisVO paisVO){
+	public void Delete(PaisVO paisVO){
 		db.beginTransaction();
 		try {
-			handleExcluir(paisVO);
+			handleDelete(paisVO);
 			db.setTransactionSuccessful();
 		} catch (Exception e) {
 			System.out.println("Transaction Error: " + e.toString());
@@ -46,10 +46,10 @@ public abstract class PaisHandler extends DataBase{
 			db.endTransaction();
 		}
 	}
-	public void Atualizar(PaisVO paisVO){
+	public void Update(PaisVO paisVO){
 		db.beginTransaction();
 		try {
-			handleAtualizar(paisVO);
+			handleUpdate(paisVO);
 			db.setTransactionSuccessful();
 		} catch (Exception e) {
 			System.out.println("Transaction Error: " + e.toString());
