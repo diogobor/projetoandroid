@@ -17,7 +17,7 @@ public class PaisDAOImpl extends PaisDAO {
 		// TODO Auto-generated constructor stub
 	}
 
-	public long inserir(Pais pais){  
+	public long insert(Pais pais){  
 	       ContentValues cv = new ContentValues();  
 	       cv.put("codigo", pais.getCodigo());  
 	       cv.put("codigoAuxiliar", pais.getCodigoAuxiliar());  
@@ -27,7 +27,7 @@ public class PaisDAOImpl extends PaisDAO {
 	       return db.insert("pais", null, pv);  
 		}
 		
-		public long atualizar(Pais pais){  
+		public long update(Pais pais){  
 		       ContentValues cv = new ContentValues();  
 		       cv.put("codigo", pais.getCodigo());  
 		       cv.put("codigoAuxiliar", pais.getCodigoAuxiliar());  
@@ -38,12 +38,12 @@ public class PaisDAOImpl extends PaisDAO {
 		           new String[]{ String.valueOf(pais.getId())});  
 		   }  
 		 
-	   public int excluir(long id){  
+	   public int delete(long id){  
 	       return db.delete("pais", "_id = ?",   
 	           new String[]{ String.valueOf(id) });  
 	   }  
 	 
-	   public List<Pais> buscarPais(PaisVO paisVO){  
+	   public List<Pais> findPais(PaisVO paisVO){  
 		   
 		   
 	       List<Pais> lista = new ArrayList<Pais>();  
