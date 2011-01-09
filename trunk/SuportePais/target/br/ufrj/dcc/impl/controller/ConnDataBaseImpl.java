@@ -5,13 +5,14 @@ import br.ufrj.dcc.api.controller.ConnDataBase;
 
 public class ConnDataBaseImpl implements ConnDataBase{
 	
-	private SQLiteDatabase database;
+	private android.database.sqlite.SQLiteDatabase db;
 	
 	public ConnDataBaseImpl (SQLiteDatabase database){
-		this.database = database;
+		this.db = database;
 	}
 	
 	public SQLiteDatabase getConnDataBase(){
-		return this.database;
+		return this.db;
 	}
+	
 }
