@@ -1,4 +1,0 @@
-#set ($generatedFile = "$welcomeFileName")
-<%@ include file="/taglib-imports.jspf" %>
-
-<logic:forward name="main"/>

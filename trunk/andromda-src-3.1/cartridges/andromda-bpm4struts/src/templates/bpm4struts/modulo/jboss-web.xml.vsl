@@ -1,3 +1,0 @@
-<jboss-web>
-	<context-root>$package.contexto</context-root>
-</jboss-web>
