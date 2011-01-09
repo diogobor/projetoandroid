@@ -16,7 +16,7 @@ public class PaisHandlerImpl extends PaisHandler{
 	@Override
 	public Collection handleFilter(PaisVO paisVO) {
 		
-		List listaPais = paisDao.buscarPais(paisVO);
+		List listaPais = paisDao.findPais(paisVO);
 		return listaPais;
 	}
 
@@ -29,12 +29,12 @@ public class PaisHandlerImpl extends PaisHandler{
 		pais.setDescricao(paisVO.getDescricao());
 		pais.setValor(paisVO.getValor());
 		
-		paisDao.inserir(pais);
+		paisDao.insert(pais);
 		
 	}
 	public void handleExcluir(PaisVO paisVO)
 	{
-		paisDao.excluir(paisVO.getId());
+		paisDao.delete(paisVO.getId());
 	}
 
 	public void handleAtualizar(PaisVO paisVO)
@@ -45,7 +45,7 @@ public class PaisHandlerImpl extends PaisHandler{
 		pais.setDescricao(paisVO.getDescricao());
 		pais.setValor(paisVO.getValor());
 		
-		paisDao.atualizar(pais);
+		paisDao.update(pais);
 	}
 
 
