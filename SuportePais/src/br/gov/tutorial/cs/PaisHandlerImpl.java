@@ -32,12 +32,12 @@ public class PaisHandlerImpl extends PaisHandler{
 		paisDao.insert(pais);
 		
 	}
-	public void handleExcluir(PaisVO paisVO)
+	public void handleDelete(PaisVO paisVO)
 	{
 		paisDao.delete(paisVO.getId());
 	}
 
-	public void handleAtualizar(PaisVO paisVO)
+	public void handleUpdate(PaisVO paisVO)
 	{
 		Pais pais = new PaisImpl();
 		pais.setCodigo(paisVO.getCodigo());
