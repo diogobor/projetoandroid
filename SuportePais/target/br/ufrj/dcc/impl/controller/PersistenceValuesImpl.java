@@ -1,7 +1,7 @@
 package br.ufrj.dcc.impl.controller;
 
 import android.content.ContentValues;
-import br.ufrj.dcc.api.controller.ConnDataBase;
+import br.ufrj.dcc.api.controller.ConnectionDataBase;
 import br.ufrj.dcc.api.controller.PersistenceValues;
 import br.ufrj.dcc.api.controller.ResultDataBase;
 
@@ -14,8 +14,8 @@ public class PersistenceValuesImpl implements PersistenceValues {
 		this.value = value;
 	}
 	
-	public PersistenceValuesImpl (ConnDataBase db) {
-		this.db = ((ConnDataBaseImpl)db).getConnDataBase();
+	public PersistenceValuesImpl (ConnectionDataBase db) {
+		this.db = ((ConnectionDataBaseImpl)db).getConnDataBase();
 	}
 	
 	public ContentValues getPersistenceValues(){
