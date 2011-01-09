@@ -18,12 +18,12 @@ public abstract class PaisDAO extends DAO {
 		executeSQL(SCRIPT_DB_CREATE);
 	}
 
-	public abstract long inserir(Pais pais);
+	public abstract long insert(Pais pais);
 	
-	public abstract long atualizar(Pais pais);
+	public abstract long update(Pais pais);
 	 
-    public abstract int excluir(long id); 
+    public abstract int delete(long id); 
  
-    public abstract List<Pais> buscarPais(PaisVO paisVO); 
+    public abstract List<Pais> findPais(PaisVO paisVO); 
  
 }
