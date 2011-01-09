@@ -1,4 +1,0 @@
-#set ($generatedFile = "$stringUtils.replace($customTypesPackage, '.', '/')/UtilServiceHandlerLocal.java")
-package ${customTypesPackage};
-
-public interface UtilServiceHandlerLocal extends javax.ejb.EJBLocalObject, UtilServiceHandlerBI{}
