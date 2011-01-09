@@ -9,7 +9,7 @@ public class ContextDataBaseImpl extends SQLiteOpenHelper implements ContextData
 
 	private String scriptCreate;  
     private String[] scriptsCreate;
-   
+  
     public ContextDataBaseImpl(android.content.Context activity, String dbName,int dbVersion) {
 		super(activity, dbName,null, dbVersion);		
 	}
