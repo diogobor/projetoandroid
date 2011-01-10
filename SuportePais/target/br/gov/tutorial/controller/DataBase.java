@@ -1,37 +1,37 @@
 package br.gov.tutorial.controller;
 
-import br.ufrj.dcc.api.controller.ConnDataBase;
-import br.ufrj.dcc.api.controller.DatabaseHelper;
+import br.ufrj.dcc.api.controller.ConnectionDataBase;
+import br.ufrj.dcc.api.controller.ContextDataBase;
 import br.ufrj.dcc.impl.ActivityHandler;
-import br.ufrj.dcc.impl.controller.ConnDataBaseImpl;
-import br.ufrj.dcc.impl.controller.DatabaseHelperImpl;
+import br.ufrj.dcc.impl.controller.ConnectionDataBaseImpl;
+import br.ufrj.dcc.impl.controller.ContextDataBaseImpl;
 import br.ufrj.dcc.impl.controller.PersistenceValuesImpl;
 
 public class DataBase{
 	
 	private static final String NOME_BANCO = "SuportePaisDB";
 	private static final int VERSAO_BANCO = 1;
-	private DatabaseHelper dbHelper;
-	private ConnDataBase dbHelperTemp;
+	private ConnectionDataBase connection;
+	private ContextDataBase context;
 	protected static PersistenceValuesImpl db;
-	//protected static SQLite db;
 	
 	public DataBase (){
-		if (dbHelper == null)
-			dbHelper = new DatabaseHelperImpl(ActivityHandler.activity, NOME_BANCO, VERSAO_BANCO);
-		if (dbHelperTemp == null)
-			dbHelperTemp = new ConnDataBaseImpl(((DatabaseHelperImpl)dbHelper).getWritableDatabase());
+		
+		if (context == null)
+			context = new ContextDataBaseImpl(ActivityHandler.activity, NOME_BANCO, VERSAO_BANCO);
+		if (connection == null)
+			connection = new ConnectionDataBaseImpl(((ContextDataBaseImpl)context).getWritableDatabase());
 		if (db == null){
-			db = new PersistenceValuesImpl(dbHelperTemp);
+			db = new PersistenceValuesImpl(connection);
 		}
 	}
 	
 	public void executeSQL(String sql){
 		//connDB = new ConnDataBaseImpl(((DatabaseHelperImpl)dbHelper).getWritableDatabase());
-		dbHelperTemp = new ConnDataBaseImpl(((DatabaseHelperImpl)dbHelper).getWritableDatabase());
-		dbHelper.insertSQL(dbHelperTemp,sql);
+		connection = new ConnectionDataBaseImpl(((ContextDataBaseImpl)context).getWritableDatabase());
+		context.insertSQL(connection,sql);
 		//db = new SQLiteImpl(((DatabaseHelperImpl)dbHelper).getWritableDatabase());
-		dbHelperTemp = new ConnDataBaseImpl(((DatabaseHelperImpl)dbHelper).getWritableDatabase());
-		db = new PersistenceValuesImpl(dbHelperTemp);
+		connection = new ConnectionDataBaseImpl(((ContextDataBaseImpl)context).getWritableDatabase());
+		db = new PersistenceValuesImpl(connection);
 	}
 }
