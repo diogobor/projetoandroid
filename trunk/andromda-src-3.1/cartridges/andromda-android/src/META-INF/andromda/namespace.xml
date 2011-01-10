@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<namespace name="android">
+    <components>
+        <component name="cartridge">
+            <path>META-INF/andromda/cartridge.xml</path>
+        </component>
+        <component name="metafacades">
+            <path>META-INF/andromda/metafacades.xml</path>
+        </component>
+        <component name="profile">
+            <path>META-INF/andromda/profile.xml</path>
+        </component>
+    </components>
+    <properties>
+        <!-- namespace-propertyGroup merge-point -->
+        <propertyGroup name="Outlets">
+            <documentation>
+                Defines the locations to which output is generated.
+            </documentation>
+            <property name="entities">
+                <documentation>
+                    The directory to which hibernate entities are generated.  Please <strong>NOTE</strong>
+                    that the entity implementation classes will also be generated to this location when
+                    <strong>no operations</strong> are present on the entity with <em>instance scope</em>.
+                </documentation>
+            </property>
+            <property name="entity-impls">
+                <documentation>
+                    The location to which hibernate entity implementation files are generated. Please <strong>NOTE</strong>
+                    that the entity implementation classes will be generated to the <em>entities</em> outlet when
+                    <strong>no operations</strong> are present on the entity with <em>instance scope</em>.
+                </documentation>
+            </property>
+            <property name="transfers">
+                <documentation>
+                </documentation>
+            </property>  
+            <property name="transfer-impls">
+                <documentation>
+                </documentation>
+            </property>                      
+        </propertyGroup>     
+    	<propertyGroup name="Other">
+            <property name="hibernateVersion">
+                <default>2</default>
+                <documentation>
+                    The version of Hibernate to use when generating.
+                    Allowable values are:
+                    <ul>
+                        <li>2 - Hibernate 2.x</li>
+                        <li>3 - Hibernate 3.x</li>
+                    </ul>
+                </documentation>
+            </property>
+            
+            <property name="modelPackageName">
+                <default>cd</default>
+                <documentation>
+                    Nome do pacote de dominio.
+                </documentation>
+            </property>
+            <property name="schemaDataBase">
+                <default>schemaDataBase</default>
+                <documentation>
+                	DataBase schema's name.
+                </documentation>
+            </property>
+            <property name="dataBaseVersion">
+                <default>1</default>
+                <documentation>
+                	DataBase version.
+                </documentation>
+            </property>
+            <property name="controllerPackageName">
+                <default>controller</default>
+                <documentation>
+                    Nome do pacote de controle.
+                </documentation>
+            </property>  
+            <property name="procedureName" required="false">
+            </property>
+            
+            <property name="loginDefault" required="false">
+            </property>
+            <property name="auditoriaUsaAssinaturaDigital">
+                <default>false</default>
+            </property>
+            <property name="transferPackageName">
+                <default>to</default>
+                <documentation>
+                    Nome do pacote de transferencia.
+                </documentation>
+            </property>             
+            <property name="controleAcessoDir">
+                <default>accessControl</default>
+                <documentation>
+                    Nome do pacote de controle de acesso.
+                </documentation>
+            </property>           
+            <property name="wsdPackageName">
+                <default>ws</default>
+                <documentation>
+                    Nome do pacote de classes webService.
+                </documentation>
+            </property> 
+            <property name="actionPackageName">
+                <default>action</default>
+                <documentation>
+                    Nome do pacote de transferencia.
+                </documentation>
+            </property>                          
+            <property name="exportPackageName">
+                <default>export</default>
+                <documentation>
+                    Nome do pacote de transferencia.
+                </documentation>
+            </property>
+             <property name="securityRealm" required="false">
+                <documentation>
+                    The name of the security realm (i.e. animal-quiz, other, etc).
+                    <strong>NOTE:</strong>This enables EJB security if specified.
+                </documentation>
+            </property>
+            <property name="customTypesPackage">
+                <default>org.andromda.persistence.hibernate</default>
+                <documentation>
+                </documentation>
+            </property>
+            <property name="userTypesPackage">
+                <default>org.andromda.persistence.hibernate.usertypes</default>
+                <documentation>
+                    Defines the package for the Hibernate user types
+                </documentation>
+            </property>
+            <property name="serviceLocatorName">
+                <default>ServiceLocator</default>
+                <documentation>
+                    The name to give to the generated service locator class.
+                </documentation>
+            </property>
+            <property name="hibernatePoolSize" required="false">
+                <documentation>
+                    Hibernate connection pool size.
+                </documentation>
+            </property>
+            <property name="hibernateJndiName">
+                <default>java:/hibernate/SessionFactory</default>
+                <documentation>
+                    JNDI name bound to the SessionFactory.
+                </documentation>
+            </property>
+            <property name="xmlEncoding">
+                <default>ISO-8859-1</default>
+                <documentation>
+                    Encoding for generated XML files.
+                </documentation>
+            </property>
+            <property name="generateEntityEqualsAndHashCode">
+                <default>true</default>
+                <documentation>
+                    Indicates whether or not a default equals and hashCode implementation should be generated.
+                </documentation>
+            </property>
+            <!-- This property is only relevant for Hibernate 3 -->
+            <property name="hibernateQueryFactory">
+                <default>org.hibernate.hql.ast.ASTQueryTranslatorFactory </default>
+                <!--<default>org.hibernate.hql.classic.ClassicQueryTranslatorFactory</default>-->                
+                <documentation>
+                    Hibernate3 comes with a brand-new, ANTLR-based HQL/SQL query translator. However, it is still buggy and so in mean time use the Hibernate 2.1 query parser which is still available.
+                    Possible values are:
+                     <ul>
+                        <li>org.hibernate.hql.ast.ASTQueryTranslatorFactory (for the new query parser)</li>
+                        <li>org.hibernate.hql.classic.ClassicQueryTranslatorFactory (for the old parser)</li>
+                     </ul>
+                </documentation>
+            </property>
+            <property name="maxRows">
+            	<default>20</default>
+                <documentation>
+                     Number of rows by page
+                </documentation>
+            </property>
+            <property name="maxPages">
+            	<default>10</default>
+                <documentation>
+                     Number of pages by group
+                </documentation>
+            </property>
+            <property name="daoMethod">
+            	<default>@andromda.persistence.DAOMethod</default>
+                <documentation>
+                     Indicates if a method is or not created on DAO class
+                </documentation>
+            </property>
+            <property name="throwsVetoException">
+            	<default>@andromda.persistence.throwsVetoException</default>
+                <documentation>
+                     Indicates if a method will throw PropetryVetoException
+                </documentation>
+            </property>
+            <property name="exportId">
+            	<default>ExportId</default>
+                <documentation>
+                     Identifica atributos que servirão para identificar a classe na exportação/importação
+                </documentation>
+            </property>
+            <property name="comment">
+            	<default>@andromda.persistence.comment</default>
+                <documentation>
+                     Representa comentários em class, Association, AssociationEnd e Parameter
+                </documentation>
+            </property>
+            <property name="wsdStereotype">
+            	<default>WebServiceData</default>
+                <documentation>
+                     Indica se uma classe será transferida em webService
+                </documentation>
+            </property>
+            <property name="excludesWSDStereotype">
+            	<default>ExcludesWSD</default>
+                <documentation>
+                     Indica se um atributo ou relacao não será transferida em uma classe webService
+                </documentation>
+            </property>
+          <property name="maxSizeClass">
+                <default>200</default>
+            </property>
+            <property name="visitorAdapterRoot">
+            	<default>VisitorAdapterRoot</default>
+            </property>
+            <property name="projectId">
+            	<default>hibernate</default>
+            </property>
+            <property name="jboss403">
+            	<default>false</default>
+            </property>
+        </propertyGroup>
+    </properties>
+</namespace>

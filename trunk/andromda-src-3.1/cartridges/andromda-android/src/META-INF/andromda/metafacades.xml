@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!-- contains the hibernate cartridge metafacade mappings -->
+<metafacades>
+    
+    <!-- Deve existir pelo menos um metafacade dentro deste aqui -->
+    <metafacade class="org.andromda.cartridges.hibernate.metafacades.HibernateEntityAttributeLogicImpl">
+        <mapping class="org.omg.uml.foundation.core.Attribute$Impl">
+            <context>org.andromda.cartridges.hibernate.metafacades.CoppetecHibernateEntity</context>
+        </mapping>
+    </metafacade>
+    
+</metafacades>

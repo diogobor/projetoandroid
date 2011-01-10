@@ -1,0 +1,33 @@
+/**
+ * Attention: Generated source! Do not modify by hand!
+ */
+#if ($entity.packageName)
+package $entity.packageName;
+#end
+
+import java.util.List;
+import ${customTypesPackage}.vo.${entity.name}VO;
+
+diogoooooooooooo
+
+public abstract class ${entity.name}DAO extends DAO {	
+	
+	private static final String SCRIPT_DB_CREATE =  
+	       "create table if not exists ${entity.name} (_id integer primary "+  
+	       "key autoincrement, codigo text not null, "+  
+	       "codigoAuxiliar text not null, valor text not null,"+
+		   "descricao text not null);";
+	
+	public ${entity.name}DAO() {
+		executeSQL(SCRIPT_DB_CREATE);
+	}
+
+	public abstract long insert(${entity.name} obj);
+	
+	public abstract long update(${entity.name} obj);
+	 
+    public abstract int delete(long id); 
+ 
+    public abstract List<${entity.name}> find${entity.name}(${entity.name}VO vo); 
+ 
+}

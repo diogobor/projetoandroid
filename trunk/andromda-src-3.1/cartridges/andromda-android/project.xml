@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+    <extend>../project.xml</extend>
+    <artifactId>andromda-android-cartridge-coppetec</artifactId>
+    <name>AndroMDA Android Cartridge</name>
+    <shortDescription>Android Cartridge</shortDescription>
+    <description> Produces Entity from a model. </description>
+    <issueTrackingUrl>${issue.tracking.location}/jira/BrowseProject.jspa?id=10011&amp;decorator=none</issueTrackingUrl>
+    <developers>
+        <developer>
+            <name>Diogo Borges</name>
+            <id>diogobor</id>
+            <email>diogobor@gmail.com</email>
+        </developer>
+    </developers>
+    <dependencies>
+        <dependency>
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+            <version>2.0</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>commons-collections</groupId>
+            <artifactId>commons-collections</artifactId>
+            <version>3.1</version>
+            <type>jar</type>
+        </dependency>
+        <!-- test dependencies -->
+        <dependency>
+            <groupId>andromda</groupId>
+            <artifactId>maven-andromda-plugin</artifactId>
+            <version>${pom.currentVersion}</version>
+            <type>plugin</type>
+        </dependency>
+        <dependency>
+            <groupId>andromda</groupId>
+            <artifactId>andromda-core</artifactId>
+            <version>${pom.currentVersion}</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>andromda</groupId>
+            <artifactId>andromda-metafacades-uml</artifactId>
+            <version>${pom.currentVersion}</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>andromda</groupId>
+            <artifactId>andromda-metafacades-uml14</artifactId>
+            <version>${pom.currentVersion}</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>andromda</groupId>
+            <artifactId>andromda-meta-cartridge</artifactId>
+            <version>${pom.currentVersion}</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>andromda</groupId>
+            <artifactId>andromda-hibernate-cartridge</artifactId>
+            <version>${pom.currentVersion}</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.8</version>
+            <properties/>
+        </dependency>
+    </dependencies>
+</project>
