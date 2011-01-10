@@ -1,0 +1,47 @@
+<project name="andromda-ant" default="run" basedir=".">
+    
+    <description>
+    	
+        This build script creates the lib.zip containing
+    	all dependencies required to run an AndroMDA application
+    	created by the AndroMDA ant tool.
+    	
+    	IMPORTANT: this is intended to be run from the 
+        AndroMDA binary distribution (as it copies all 
+    	required dependencies into the andromda ant 
+    	tool jar).
+	
+    </description>
+    
+    <target name="init">
+        <property name="lib.dir" value="lib"/>
+        <path id="andromda.ant.classpath">
+            <fileset dir=".">
+                <include name="andromda-ant-3.1.jar"/> 
+            </fileset>        
+            <fileset dir="${lib.dir}">        
+                <include name="velocity-1.4.jar"/>
+                <include name="commons-collections-3.1.jar"/>
+                <include name="commons-io-1.1.jar"/>
+                <include name="logkit-1.0.1.jar"/>
+            </fileset>
+        </path>
+    </target>
+
+    <target name="run" depends="init">
+        <copy todir="${lib.dir}" flatten="true" includeEmptyDirs="false">
+        	<fileset dir="../lib"/>
+        	<fileset dir="../andromda">
+        		<exclude name="**maven**"/>
+        	</fileset>
+        	<fileset dir="../andromda/jars"/>
+    	</copy>
+        <java classname="org.andromda.ant.AndromdaAntRunner">
+            <classpath>
+                <path refid="andromda.ant.classpath"/>
+                <pathelement path="."/>
+            </classpath>
+        </java>
+    </target>
+
+</project>
