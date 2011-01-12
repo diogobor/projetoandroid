@@ -4,14 +4,15 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import br.ufrj.dcc.api.controller.ConnectionDataBase;
 import br.ufrj.dcc.api.controller.ContextDataBase;
+import br.ufrj.dcc.impl.ActivityHandler;
 
 public class ContextDataBaseImpl extends SQLiteOpenHelper implements ContextDataBase{
 
 	private String scriptCreate;  
     private String[] scriptsCreate;
   
-    public ContextDataBaseImpl(android.content.Context activity, String dbName,int dbVersion) {
-		super(activity, dbName,null, dbVersion);		
+    public ContextDataBaseImpl(String dbName,int dbVersion) {
+		super(ActivityHandler.activity, dbName,null, dbVersion);		
 	}
 
 	@Override
