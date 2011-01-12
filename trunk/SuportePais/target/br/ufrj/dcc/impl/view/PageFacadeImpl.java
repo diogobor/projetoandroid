@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+import br.ufrj.dcc.api.view.ActionCommander;
 import br.ufrj.dcc.api.view.Button;
 import br.ufrj.dcc.api.view.InputText;
 import br.ufrj.dcc.api.view.PageFacade;
@@ -40,10 +41,9 @@ public class PageFacadeImpl implements PageFacade{
 		
 	}
 
-	public void createTable(String tableId ,Collection elements,Collection<Button> buttons, String ... fields) throws Exception {
+	public void createTable(String tableId , Collection elements,Collection<Button> buttons, String ... fields) throws Exception {
 		TableLayout t = ((TableLayout)ActivityHandler.activity.findViewById(Integer.parseInt(tableId)));
-		for(Object element : elements){
-			//TODO
+		for(final Object element : elements){
 			TableRow row = new TableRow(ActivityHandler.activity);
 			Method[] methods  = element.getClass().getMethods();
 			Method[] getters=new Method[fields.length];
@@ -64,9 +64,16 @@ public class PageFacadeImpl implements PageFacade{
 				}
 			}
 			if(buttons!=null){
-				for(Button button : buttons){
+				for(final Button button : buttons){
 					ButtonImpl but = (ButtonImpl)createButton(button.getText());
-					but.setAction(button.getAction());
+					ActionCommander com = new ActionCommander(){
+						@Override
+						public void action() {
+							//SessionImpl.instance().put(PageFacade.TABLE_ACTION_KEY, element);
+							button.getAction();
+						}
+					};
+					but.setAction(com);
 					row.addView(but.getSource());
 				}
 			}
@@ -79,6 +86,11 @@ public class PageFacadeImpl implements PageFacade{
 		android.widget.Button source = new android.widget.Button(ActivityHandler.activity);
 		source.setText(label);
 		return new ButtonImpl(source);
+	}
+	
+	public void setLabel(String id, String valor){
+		TextView tx = (TextView)ActivityHandler.activity.findViewById(Integer.parseInt(id));
+		tx.setText(valor);
 	}
 	private static String capitalize(String s) {
         if (s.length() == 0) return s;
