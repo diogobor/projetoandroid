@@ -2,6 +2,7 @@ package br.ufrj.dcc.impl.view;
 
 import java.lang.reflect.Method;
 import java.util.Collection;
+import java.util.List;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -9,7 +10,6 @@ import android.widget.EditText;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
-import br.ufrj.dcc.api.view.ActionCommander;
 import br.ufrj.dcc.api.view.Button;
 import br.ufrj.dcc.api.view.InputText;
 import br.ufrj.dcc.api.view.PageFacade;
@@ -41,8 +41,9 @@ public class PageFacadeImpl implements PageFacade{
 		
 	}
 
-	public void createTable(String tableId , Collection elements,Collection<Button> buttons, String ... fields) throws Exception {
+	public void createTable(String tableId , Collection elements,List<Button[]> buttons, String ... fields) throws Exception {
 		TableLayout t = ((TableLayout)ActivityHandler.activity.findViewById(Integer.parseInt(tableId)));
+		int k=0;
 		for(final Object element : elements){
 			TableRow row = new TableRow(ActivityHandler.activity);
 			Method[] methods  = element.getClass().getMethods();
@@ -63,20 +64,13 @@ public class PageFacadeImpl implements PageFacade{
 					row.addView(campo);
 				}
 			}
-			if(buttons!=null){
-				for(final Button button : buttons){
-					ButtonImpl but = (ButtonImpl)createButton(button.getText());
-					ActionCommander com = new ActionCommander(){
-						@Override
-						public void action() {
-							//SessionImpl.instance().put(PageFacade.TABLE_ACTION_KEY, element);
-							button.getAction();
-						}
-					};
-					but.setAction(com);
-					row.addView(but.getSource());
+			if(buttons!=null && buttons.get(k)!=null){
+				Button[] arrayButtons =buttons.get(k);
+				for(int i=0; i< arrayButtons.length ; i++){
+					row.addView(((ButtonImpl)arrayButtons[i]).getSource());
 				}
 			}
+			k++;
 			t.addView(row);
 		}
 		

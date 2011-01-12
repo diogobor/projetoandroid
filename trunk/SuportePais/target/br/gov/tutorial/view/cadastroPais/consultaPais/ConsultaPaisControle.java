@@ -2,6 +2,7 @@ package br.gov.tutorial.view.cadastroPais.consultaPais;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import br.gov.tutorial.R;
 import br.gov.tutorial.view.cadastroPais.consultaPais.form.ConsultaPaisUCForm;
@@ -11,6 +12,7 @@ import br.ufrj.dcc.api.view.ActionCommander;
 import br.ufrj.dcc.api.view.Button;
 import br.ufrj.dcc.api.view.PageFacade;
 import br.ufrj.dcc.impl.view.PageFacadeImpl;
+import br.ufrj.dcc.impl.view.SessionImpl;
 
 public abstract class ConsultaPaisControle {
 	protected ActionCommander btnConsulta = new ActionCommander(){
@@ -60,16 +62,21 @@ public abstract class ConsultaPaisControle {
 	public void preencherGridPaises(Collection paises) throws Exception{
 		//TODO
 		PageFacade page = new PageFacadeImpl();
-		Collection<Button> botoes = new ArrayList<Button>();
-		Button button = page.createButton("detalhar");
-		botoes.add(button);
-		button.setAction(new ActionCommander(){
-			public void action() {
-				DetalhaPaisControle controle = new DetalhaPaisControleImpl();
-				controle.iniciar();
-			}
-			
-		});
+		List<Button[]> botoes = new ArrayList<Button[]>();
+		
+		for(final Object pais : paises){
+			Button[] arrayBotoes = new Button[1]; //Só tem o botão detalhar
+			Button button = page.createButton("detalhar");
+			arrayBotoes[0] = button;
+			button.setAction(new ActionCommander(){
+				public void action() {
+					SessionImpl.instance().put(PageFacade.TABLE_ACTION_KEY, pais );
+					DetalhaPaisControle controle = new DetalhaPaisControleImpl();
+					controle.iniciar();
+				}
+			});
+			botoes.add(arrayBotoes);
+		}
 		page.createTable(String.valueOf(R.id.Tabela01)
 				, paises, botoes, "valor","codigo");
 
