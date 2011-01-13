@@ -6,7 +6,7 @@ public class ConnectionDataBaseImpl implements ConnectionDataBase{
 	
 	private android.database.sqlite.SQLiteDatabase db;
     
-	public ConnectionDataBaseImpl(br.ufrj.dcc.impl.controller.ContextDataBaseImpl context ){
+	public ConnectionDataBaseImpl(br.ufrj.dcc.impl.controller.ContextDataBaseImpl context ) throws Exception{
             this.db = context.getWritableDatabase();
     }
     public android.database.sqlite.SQLiteDatabase getConnDataBase(){
