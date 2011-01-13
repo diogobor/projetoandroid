@@ -13,8 +13,7 @@ import br.ufrj.dcc.impl.controller.ResultDataBaseImpl;
 
 public class PaisDAOImpl extends PaisDAO {
 
-	public PaisDAOImpl() {
-		// TODO Auto-generated constructor stub
+	public PaisDAOImpl(){
 	}
 
 	public long insert(Pais pais){  
