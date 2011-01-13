@@ -1,0 +1,16 @@
+#set ($generatedFile = "${controller.fullPath}.java")
+package $controller.packageName;
+
+
+
+public class ConsultaPaisControleImpl extends ConsultaPaisControle{
+
+	#foreach($operation in $controller.operations)
+	public ${operation.returnType} ${operation.name}(${controller.nameForm} form){
+	#if(${operation.returnType}.equals("void"))
+	#else
+		return null;
+	#end
+	}
+	#end
+}
