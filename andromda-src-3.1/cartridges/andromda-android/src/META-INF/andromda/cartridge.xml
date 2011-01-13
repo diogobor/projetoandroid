@@ -7,11 +7,6 @@
     <property reference="projectId"/>
 	<property reference="modelPackageName"/>
 	<property reference="controllerPackageName"/>
-	<property reference="transferPackageName"/>
-	<property reference="wsdPackageName"/>
-	<property reference="actionPackageName"/>  	 
-	<property reference="exportPackageName"/>
-    <property reference="securityRealm"/>
     <property reference="customTypesPackage"/>
     <property reference="schemaDataBase"/>
     <property reference="dataBaseVersion"/>
@@ -49,9 +44,111 @@
                 </type>                
             </modelElement>
         </modelElements>
-    </template> 
-
-    <!-- cartridge-template merge-point -->
+    </template>
+    
+    <!-- API , camada de visão --> 
+	<template
+        path="templates/android/api/ActionCommander.vsl"
+        outputPattern="$generatedFile"
+        outlet="apiView"
+        overwrite="true">
+    </template>
+    <template
+        path="templates/android/api/Button.vsl"
+        outputPattern="$generatedFile"
+        outlet="apiView"
+        overwrite="true">
+    </template>
+    <template
+        path="templates/android/api/InputText.vsl"
+        outputPattern="$generatedFile"
+        outlet="apiView"
+        overwrite="true">
+    </template>
+    <template
+        path="templates/android/api/PageFacade.vsl"
+        outputPattern="$generatedFile"
+        outlet="apiView"
+        overwrite="true">
+    </template>
+    <template
+        path="templates/android/api/Session.vsl"
+        outputPattern="$generatedFile"
+        outlet="apiView"
+        overwrite="true">
+    </template>
+    
+    <!-- Implementação da API , camada de visão --> 
+	<template
+        path="templates/android/impl/ActivityHandler.vsl"
+        outputPattern="$generatedFile"
+        outlet="impl"
+        overwrite="true">
+    </template>
+    <template
+        path="templates/android/impl/ButtonImpl.vsl"
+        outputPattern="$generatedFile"
+        outlet="implView"
+        overwrite="true">
+    </template>
+    <template
+        path="templates/android/impl/InputTextImpl.vsl"
+        outputPattern="$generatedFile"
+        outlet="implView"
+        overwrite="true">
+    </template>
+    <template
+        path="templates/android/impl/PageFacadeImpl.vsl"
+        outputPattern="$generatedFile"
+        outlet="implView"
+        overwrite="true">
+    </template>
+    <template
+        path="templates/android/impl/SessionImpl.vsl"
+        outputPattern="$generatedFile"
+        outlet="implView"
+        overwrite="true">
+    </template>
+    
+    <!-- Classes do projeto, camada de visão -->
+    
+    <template
+        path="templates/android/projeto/view/Controller.vsl"
+        outputPattern="$generatedFile"
+        outlet="controllers"
+        overwrite="true">
+        <modelElements variable="controller">
+            <modelElement>
+                <type name="org.andromda.cartridges.bpm4struts.metafacades.StrutsController">
+                </type>
+            </modelElement>
+        </modelElements>
+    </template>
+    <template
+        path="templates/android/projeto/view/ControllerImpl.vsl"
+        outputPattern="$generatedFile"
+        outlet="controllers"
+        overwrite="true">
+        <modelElements variable="controller">
+            <modelElement>
+                <type name="org.andromda.cartridges.bpm4struts.metafacades.StrutsController">
+                </type>
+            </modelElement>
+        </modelElements>
+    </template>
+    <template
+        path="templates/android/projeto/view/form/Form.vsl"
+        outputPattern="$generatedFile"
+        outlet="controllers"
+        overwrite="true">
+        <modelElements variable="controller">
+            <modelElement>
+                <type name="org.andromda.cartridges.bpm4struts.metafacades.StrutsController">
+                </type>
+            </modelElement>
+        </modelElements>
+    </template>
+    
  
 
 </cartridge>
