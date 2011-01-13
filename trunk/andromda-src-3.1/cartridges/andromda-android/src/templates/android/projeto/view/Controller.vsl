@@ -1,0 +1,93 @@
+#set ($generatedFile = "${controller.fullPath}.java")
+package $controller.packageName;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
+import ${customTypesPackage}.R;
+import ${controller.packageName}.form.${controller.nameForm};
+#foreach ($ucTransition in $controller.ucTransitions)
+import ${ucTransition.fullyQualifiedName};
+import ${ucTransition.fullyQualifiedName}Impl;
+#end
+import br.ufrj.dcc.api.view.ActionCommander;
+import br.ufrj.dcc.api.view.Button;
+import br.ufrj.dcc.api.view.PageFacade;
+import br.ufrj.dcc.impl.view.PageFacadeImpl;
+import br.ufrj.dcc.impl.view.SessionImpl;
+
+public abstract class ${controller.name} {
+	${controller.nameForm} form = new ${controller.nameForm}();
+	#foreach($signal in controller.uc.signal)
+	protected ActionCommander btn${signal.name} = new ActionCommander(){
+		public void action() {
+			 
+			PageFacade page = new PageFacadeImpl();
+			
+			#foreach($parameter in $signal.parameters)
+			form.set${parameter.name}(page.getInputText(String.valueOf(R.id.${parameter.name})).getValue();
+			#end
+			${signal.nomeAcao}(form);
+			
+			page.changePage(String.valueOf(
+					R.layout.${signal.nextPageName}));
+			
+			## Como vou preencher isso?????
+			preencherResultadoDaConsultaDePais(form);
+		}
+	};
+	#end
+	public void iniciar(){
+		preInit();
+		PageFacade page = new PageFacadeImpl();
+		
+		page.changePage(String.valueOf(
+				R.layout.${controller.uc.firstPageName}));
+		#foreach($signal in controller.uc.signal)
+		page.getButton(String.valueOf(R.id.${signal.name})).setAction(btn${signal.name});
+		#end
+		posInit();
+	}
+	protected void preInit(){
+	}
+	protected void posInit(){
+	}
+	## O que fazer com isso????
+	private void preencherResultadoDaConsultaDePais(ConsultaPaisUCForm form){
+		try {
+			preencherGridPaises(form.getPaises());
+		} catch (Exception e) {
+			PageFacade page = new PageFacadeImpl();
+			page.showErrorMessage("Um erro foi encontrado na aplicação");
+		}
+		
+	}
+	#foreach($operation in $controller.operations)
+		public abstract ${operation.returnType} ${operation.name}(${controller.nameForm} form);
+	#end
+	/*
+	public void preencherGridPaises(Collection paises) throws Exception{
+		//TODO
+		PageFacade page = new PageFacadeImpl();
+		List<Button[]> botoes = new ArrayList<Button[]>();
+		
+		for(final Object pais : paises){
+			Button[] arrayBotoes = new Button[1]; //Só tem o botão detalhar
+			Button button = page.createButton("detalhar");
+			arrayBotoes[0] = button;
+			button.setAction(new ActionCommander(){
+				public void action() {
+					SessionImpl.instance().put(PageFacade.TABLE_ACTION_KEY, pais );
+					DetalhaPaisControle controle = new DetalhaPaisControleImpl();
+					controle.iniciar();
+				}
+			});
+			botoes.add(arrayBotoes);
+		}
+		page.createTable(String.valueOf(R.id.Tabela01)
+				, paises, botoes, "valor","codigo");
+
+	}*/
+	
+}

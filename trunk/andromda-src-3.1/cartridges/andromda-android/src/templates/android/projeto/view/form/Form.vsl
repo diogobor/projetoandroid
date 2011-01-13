@@ -1,0 +1,29 @@
+#set ($generatedFile = "form/${controller.fullPath}Form.java")
+package ${controller.packageName}.form;
+
+#set($useCase= $controller.uc)
+
+#foreach($dependecy in $useCase.dependecies)
+import $dependency;
+#end
+
+public class ${controller.name}Form {
+	#foreach($parameter in $useCase.parameters)
+	private $parameter.type $parameter.name;
+	public $parameter.type get${parameter.name}(){
+		return $parameter.name;
+	}
+	public void set${parameter.name}($parameter.type $parameter.name){
+		this.${parameter.name}=${parameter.name};
+	}
+	#end	
+	
+	public ${controller.name}Form(){
+	#foreach($parameter in $useCase.parameters)
+		#if(${parameter.type}.equals("Collection"))
+			this.${parameter.name}=new java.util.ArrayList();
+		#end
+	#end
+	}
+	
+}
