@@ -1,8 +1,8 @@
 #set ($generatedFile = "DataBase.java")
 #if($stringUtils.isNotEmpty($customTypesPackage))
-#set ($generatedFile = "${stringUtils.replace($customTypesPackage,'.','/')}/${modelPackageName}/${generatedFile}")
+#set ($generatedFile = "${stringUtils.replace($customTypesPackage,'.','/')}/${controllerPackageName}/${generatedFile}")
 #end
-package ${customTypesPackage}.controller;
+package ${customTypesPackage}.${controllerPackageName};
 
 /*
  Attention: Generated code! Do not modify by hand!
