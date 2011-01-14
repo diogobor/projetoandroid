@@ -14,8 +14,8 @@ public abstract class PaisDAO extends DAO {
 //		   "descricao text not null);";
 	private static final String SCRIPT_DB_CREATE =  
 	       "create table if not exists pais (_id integer primary "+  
-	       "key autoincremento, " + getAttributes();
-	
+	       "key autoincrement, " + getAttributes();
+
 	public PaisDAO() {
 		executeSQL(SCRIPT_DB_CREATE);
 	}
