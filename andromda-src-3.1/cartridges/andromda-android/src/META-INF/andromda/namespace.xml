@@ -18,18 +18,19 @@
             <documentation>
                 Defines the locations to which output is generated.
             </documentation>
-            <property name="entities">
+            <property name="apiController">
                 <documentation>
-                    The directory to which hibernate entities are generated.  Please <strong>NOTE</strong>
-                    that the entity implementation classes will also be generated to this location when
-                    <strong>no operations</strong> are present on the entity with <em>instance scope</em>.
+                	The location to which api Controller classes files are generated.
                 </documentation>
             </property>
-            <property name="entity-impls">
+            <property name="controller">
                 <documentation>
-                    The location to which hibernate entity implementation files are generated. Please <strong>NOTE</strong>
-                    that the entity implementation classes will be generated to the <em>entities</em> outlet when
-                    <strong>no operations</strong> are present on the entity with <em>instance scope</em>.
+                    The location to which Controller classes files are generated.
+                </documentation>
+            </property>
+            <property name="implController">
+                <documentation>
+                    The location to which Controller Implementation classes files are generated.
                 </documentation>
             </property>
             <property name="apiView">
@@ -79,9 +80,6 @@
                     Nome do pacote de controle.
                 </documentation>
             </property>  
-            <property name="projectId">
-            	<default>hibernate</default>
-            </property>
         </propertyGroup>
     </properties>
 </namespace>

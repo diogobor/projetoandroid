@@ -1,10 +1,9 @@
 <cartridge>
 
-    <!-- define the template objects that are made availble to the template -->
+    <!-- define the template objects that are made available to the template -->
     <templateObject name="stringUtils" className="org.apache.commons.lang.StringUtils"/>
     
     <!-- cartridge-templateObject merge-point-->
-    <property reference="projectId"/>
 	<property reference="modelPackageName"/>
 	<property reference="controllerPackageName"/>
     <property reference="customTypesPackage"/>
@@ -17,34 +16,65 @@
 
 
     <!-- android templates -->
-	
     
+    <!-- API , camada de dados e serviços --> 
     <template
-        path="templates/android/Database.vsl"
+        path="templates/android/api/ConnectionDataBase.vsl"
         outputPattern="$generatedFile"
-        outlet="entities"
+        outlet="apiController"
         overwrite="true">
     </template>
-    
     <template
-        path="templates/android/DAO.vsl"
+        path="templates/android/api/ContextDataBase.vsl"
         outputPattern="$generatedFile"
-        outlet="entities"
+        outlet="apiController"
+        overwrite="true">
+    </template>
+    <template
+        path="templates/android/api/PersistenceValues.vsl"
+        outputPattern="$generatedFile"
+        outlet="apiController"
+        overwrite="true">
+    </template>
+    <template
+        path="templates/android/api/ResultDataBase.vsl"
+        outputPattern="$generatedFile"
+        outlet="apiController"
         overwrite="true">
     </template>
     
+    <!-- Implementação da API , camada de dados e serviços --> 
     <template
-        path="templates/android/EntityFactory.vsl"
-        outputPattern="{0}/{1}DAO.java"
-        outlet="entities"
+        path="templates/android/projeto/controller/DataBase.vsl"
+        outputPattern="$generatedFile"
+        outlet="controller"
         overwrite="true">
-        <modelElements>
-            <modelElement  variable="entity">
-                <type name="org.andromda.cartridges.hibernate.metafacades.CoppetecHibernateEntity">
-                </type>                
-            </modelElement>
-        </modelElements>
     </template>
+    <template
+        path="templates/android/impl/ConnectionDataBaseImpl.vsl"
+        outputPattern="$generatedFile"
+        outlet="implController"
+        overwrite="true">
+    </template>
+    <template
+        path="templates/android/impl/ContextDataBaseImpl.vsl"
+        outputPattern="$generatedFile"
+        outlet="implController"
+        overwrite="true">
+    </template>
+    <template
+        path="templates/android/impl/PersistenceValuesImpl.vsl"
+        outputPattern="$generatedFile"
+        outlet="implController"
+        overwrite="true">
+    </template>
+    <template
+        path="templates/android/impl/ResultDataBaseImpl.vsl"
+        outputPattern="$generatedFile"
+        outlet="implController"
+        overwrite="true">
+    </template>
+    
     
     <!-- API , camada de visão --> 
 	<template
@@ -148,7 +178,4 @@
             </modelElement>
         </modelElements>
     </template>
-    
- 
-
 </cartridge>
