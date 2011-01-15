@@ -184,6 +184,11 @@
         outputPattern="$generatedFile"
         outlet="entities"
         overwrite="true">
+        <modelElements variable="entity">
+            <modelElement>
+                <type name="org.andromda.cartridges.android.metafacades.AndroidControllerPackage"/>
+            </modelElement>
+        </modelElements>
     </template> 
     <template
         path="templates/android/projeto/data/EntityFactory.vsl"
