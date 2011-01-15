@@ -88,6 +88,12 @@
                     Nome do pacote de controle.
                 </documentation>
             </property>
+            <property name="voPackageName">
+                <default>vo</default>
+                <documentation>
+                    Nome do pacote de value objects.
+                </documentation>
+            </property>
             <property name="servicePackageName">
                 <default>cs</default>
                 <documentation>
