@@ -82,6 +82,18 @@
                     Nome do pacote de dominio.
                 </documentation>
             </property>
+            <property name="controllerPackageName">
+                <default>controller</default>
+                <documentation>
+                    Nome do pacote de controle.
+                </documentation>
+            </property>
+            <property name="servicePackageName">
+                <default>cs</default>
+                <documentation>
+                    Nome do pacote de servico.
+                </documentation>
+            </property>
             <property name="schemaDataBase">
                 <default>schemaDataBase</default>
                 <documentation>
@@ -92,12 +104,6 @@
                 <default>1</default>
                 <documentation>
                 	DataBase version.
-                </documentation>
-            </property>
-            <property name="controllerPackageName">
-                <default>controller</default>
-                <documentation>
-                    Nome do pacote de controle.
                 </documentation>
             </property>
             <property name="customTypesPackage">
