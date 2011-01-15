@@ -16,6 +16,12 @@
             <stereotype>FRONT_END_USE_CASE</stereotype>
         </mapping>
     </metafacade>
+    <metafacade class="org.andromda.cartridges.android.metafacades.AndroidControllerPackageLogicImpl" contextRoot="true">
+        <mapping class="org.omg.uml.foundation.core.UmlClass$Impl">
+            <stereotype>ENTITY</stereotype>
+        </mapping>
+        <property reference="sqlMappingsUri"/>
+    </metafacade>
     <!-- 
         <metafacade class="org.andromda.cartridges.bpm4struts.metafacades.CoppetecStrutsJspLogicImpl">
         <mapping class="org.omg.uml.behavioralelements.activitygraphs.ActionState$Impl">
