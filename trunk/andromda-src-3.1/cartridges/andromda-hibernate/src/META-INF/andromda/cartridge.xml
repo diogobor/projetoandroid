@@ -87,7 +87,7 @@
 
     <!-- hibernate 3 templates -->
 
-	<!-- <template
+	<template
         path="templates/hibernate/HibernateEntityFactory.vsl"
         outputPattern="{0}/{1}DAO.java"
         outlet="entities"
@@ -96,58 +96,6 @@
             <modelElement>
                 <type name="org.andromda.cartridges.hibernate.metafacades.CoppetecHibernateEntity">
                      <property name="version">3</property>
-                </type>                
-            </modelElement>
-        </modelElements>
-    </template>  -->
-    <template
-        path="templates/hibernate/EntityFactory.vsl"
-        outputPattern="{0}/{1}DAO.java"
-        outlet="entities"
-        overwrite="true">
-        <modelElements variable="entity">
-            <modelElement>
-                <type name="org.andromda.cartridges.hibernate.metafacades.CoppetecHibernateEntity">
-                     <!-- <property name="version">3</property>-->
-                </type>                
-            </modelElement>
-        </modelElements>
-    </template>
-    <template
-        path="templates/hibernate/EntityAbstract.vsl"
-        outputPattern="{0}/{1}.java"
-        outlet="entities"
-        overwrite="true">
-        <modelElements variable="entity">
-            <modelElement>
-                <type name="org.andromda.cartridges.hibernate.metafacades.CoppetecHibernateEntity">
-                     <!-- <property name="version">3</property>-->
-                </type>                
-            </modelElement>
-        </modelElements>
-    </template>
-    <template
-        path="templates/hibernate/EntityImpl.vsl"
-        outputPattern="{0}/{1}Impl.java"
-        outlet="entity-impls"
-        overwrite="false">
-        <modelElements variable="entity">
-            <modelElement>
-                <type name="org.andromda.cartridges.hibernate.metafacades.CoppetecHibernateEntity">
-                     <!-- <property name="version">3</property>-->
-                </type>                
-            </modelElement>
-        </modelElements>
-    </template>
-    <template
-        path="templates/hibernate/EntityFactoryImpl.vsl"
-        outputPattern="{0}/{1}DAOImpl.java"
-        outlet="entity-impls"
-        overwrite="false">
-        <modelElements variable="entity">
-            <modelElement>
-                <type name="org.andromda.cartridges.hibernate.metafacades.CoppetecHibernateEntity">
-                     <!-- <property name="version">3</property>-->
                 </type>                
             </modelElement>
         </modelElements>
