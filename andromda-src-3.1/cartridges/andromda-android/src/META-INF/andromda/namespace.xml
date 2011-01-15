@@ -33,7 +33,7 @@
                     The location to which Controller Implementation interface classes files are generated.
                 </documentation>
             </property>
-             <property name="entities">
+            <property name="entities">
                 <documentation>
                     The location to which Entity classes files are generated
                 </documentation>
@@ -41,6 +41,16 @@
             <property name="entity-impls">
                 <documentation>
                     The location to which Entity Implementation classes files are generated
+                </documentation>
+            </property>
+            <property name="services">
+                <documentation>
+                    The location to which Service classes files are generated
+                </documentation>
+            </property>
+            <property name="service-impls">
+                <documentation>
+                    The location to which Service Implementation classes files are generated
                 </documentation>
             </property>
             <property name="apiView">
