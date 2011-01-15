@@ -6,6 +6,7 @@
     <!-- cartridge-templateObject merge-point-->
 	<property reference="modelPackageName"/>
 	<property reference="controllerPackageName"/>
+	<property reference="voPackageName"/>
 	<property reference="servicePackageName"/>
     <property reference="customTypesPackage"/>
     <property reference="schemaDataBase"/>
@@ -190,6 +191,12 @@
                 <type name="org.andromda.cartridges.android.metafacades.AndroidControllerPackage"/>
             </modelElement>
         </modelElements>
+    </template>
+    <template
+        path="templates/android/projeto/data/DAO.vsl"
+        outputPattern="$generatedFile"
+        outlet="entities"
+        overwrite="true">
     </template> 
     <template
         path="templates/android/projeto/data/EntityFactory.vsl"
@@ -221,6 +228,28 @@
         <modelElements variable="entity">
             <modelElement>
                 <type name="org.andromda.cartridges.android.metafacades.AndroidControllerPackage"/>
+            </modelElement>
+        </modelElements>
+    </template>
+    <template
+        path="templates/android/projeto/data/ValueObjectEntity.vsl"
+        outputPattern="$generatedFile"
+        outlet="entities"
+        overwrite="true">
+        <modelElements variable="entity">
+            <modelElement>
+                <type name="org.andromda.cartridges.android.metafacades.AndroidControllerPackage"/>
+            </modelElement>
+        </modelElements>
+    </template>
+     <template
+        path="templates/android/projeto/data/ValueObject.vsl"
+        outputPattern="$generatedFile"
+        outlet="entities"
+        overwrite="true">
+        <modelElements variable="class">
+            <modelElement>
+                <type name="org.andromda.metafacades.uml.ValueObject"/>
             </modelElement>
         </modelElements>
     </template> 
