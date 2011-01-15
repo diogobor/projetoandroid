@@ -99,6 +99,8 @@
                 <documentation>
                     Nome do pacote de controle.
                 </documentation>
+            </property>
+            <property name="customTypesPackage">
             </property>  
         </propertyGroup>
     </properties>

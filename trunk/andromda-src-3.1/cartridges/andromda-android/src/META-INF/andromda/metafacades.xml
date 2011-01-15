@@ -1,21 +1,22 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 <!-- contains the hibernate cartridge metafacade mappings -->
 <metafacades>
-    <metafacade class="org.andromda.cartridges.bpm4struts.metafacades.StrutsControllerLogicImpl" contextRoot="true">
+    <metafacade class="org.andromda.cartridges.android.metafacades.AndroidControllerLogicImpl" contextRoot="true">
         <mapping class="org.omg.uml.foundation.core.UmlClass$Impl">
             <property name="useCase"/>
         </mapping>
     </metafacade>
-    <metafacade class="org.andromda.cartridges.bpm4struts.metafacades.CoppetecStrutsUseCaseLogicImpl">
+    <metafacade class="org.andromda.cartridges.android.metafacades.AndroidUCLogicImpl">
         <mapping class="org.omg.uml.behavioralelements.usecases.UseCase$Impl">
             <stereotype>FRONT_END_APPLICATION</stereotype>
         </mapping>
     </metafacade>
-    <metafacade class="org.andromda.cartridges.bpm4struts.metafacades.CoppetecStrutsUseCaseLogicImpl">
+    <metafacade class="org.andromda.cartridges.android.metafacades.AndroidUCLogicImpl">
         <mapping class="org.omg.uml.behavioralelements.usecases.UseCase$Impl">
             <stereotype>FRONT_END_USE_CASE</stereotype>
         </mapping>
     </metafacade>
+    <!-- 
         <metafacade class="org.andromda.cartridges.bpm4struts.metafacades.CoppetecStrutsJspLogicImpl">
         <mapping class="org.omg.uml.behavioralelements.activitygraphs.ActionState$Impl">
             <property name="frontEndView"/>
@@ -47,5 +48,5 @@
         <mapping class="org.omg.uml.behavioralelements.statemachines.CallEvent$Impl">
             <property name="containedInFrontEndUseCase"/>
         </mapping>
-    </metafacade>
+    </metafacade>-->
 </metafacades>
