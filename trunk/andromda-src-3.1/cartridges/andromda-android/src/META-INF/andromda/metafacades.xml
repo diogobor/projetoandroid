@@ -1,13 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 <!-- contains the hibernate cartridge metafacade mappings -->
 <metafacades>
-    
-    <!-- Deve existir pelo menos um metafacade dentro deste aqui -->
-    <metafacade class="org.andromda.cartridges.hibernate.metafacades.HibernateEntityAttributeLogicImpl">
-        <mapping class="org.omg.uml.foundation.core.Attribute$Impl">
-            <context>org.andromda.cartridges.hibernate.metafacades.CoppetecHibernateEntity</context>
-        </mapping>
-    </metafacade>
     <metafacade class="org.andromda.cartridges.bpm4struts.metafacades.StrutsControllerLogicImpl" contextRoot="true">
         <mapping class="org.omg.uml.foundation.core.UmlClass$Impl">
             <property name="useCase"/>
@@ -45,12 +38,11 @@
             <property name="containedInFrontEndUseCase"/>
         </mapping>
     </metafacade>
-        <metafacade class="org.andromda.cartridges.bpm4struts.metafacades.StrutsTriggerLogicImpl">
+    <metafacade class="org.andromda.cartridges.bpm4struts.metafacades.StrutsTriggerLogicImpl">
         <mapping class="org.omg.uml.behavioralelements.statemachines.SignalEvent$Impl">
             <property name="containedInFrontEndUseCase"/>
         </mapping>
     </metafacade>
-
     <metafacade class="org.andromda.cartridges.bpm4struts.metafacades.StrutsTriggerLogicImpl">
         <mapping class="org.omg.uml.behavioralelements.statemachines.CallEvent$Impl">
             <property name="containedInFrontEndUseCase"/>
