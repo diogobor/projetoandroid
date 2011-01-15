@@ -190,18 +190,33 @@
         outputPattern="$generatedFile"
         outlet="entities"
         overwrite="true">
+        <modelElements variable="entity">
+            <modelElement>
+                <type name="org.andromda.cartridges.android.metafacades.AndroidControllerPackage"/>
+            </modelElement>
+        </modelElements>
     </template> 
     <template
         path="templates/android/projeto/data/EntityFactoryImpl.vsl"
         outputPattern="$generatedFile"
         outlet="entity-impls"
         overwrite="true">
+        <modelElements variable="entity">
+            <modelElement>
+                <type name="org.andromda.cartridges.android.metafacades.AndroidControllerPackage"/>
+            </modelElement>
+        </modelElements>
     </template> 
     <template
         path="templates/android/projeto/data/EntityImpl.vsl"
         outputPattern="$generatedFile"
         outlet="entity-impls"
         overwrite="true">
+        <modelElements variable="entity">
+            <modelElement>
+                <type name="org.andromda.cartridges.android.metafacades.AndroidControllerPackage"/>
+            </modelElement>
+        </modelElements>
     </template> 
     
     <!-- Classes do projeto, camada de servico -->
@@ -211,12 +226,22 @@
         outputPattern="$generatedFile"
         outlet="services"
         overwrite="true">
+        <modelElements variable="service">
+            <modelElement>
+                <type name="org.andromda.cartridges.android.metafacades.AndroidServicePackage"/>
+            </modelElement>
+        </modelElements>
     </template>
     <template
         path="templates/android/projeto/service/ServiceHandlerImpl.vsl"
         outputPattern="$generatedFile"
         outlet="service-impls"
         overwrite="true">
+        <modelElements variable="service">
+            <modelElement>
+                <type name="org.andromda.cartridges.android.metafacades.AndroidServicePackage"/>
+            </modelElement>
+        </modelElements>
     </template>  
     
     
