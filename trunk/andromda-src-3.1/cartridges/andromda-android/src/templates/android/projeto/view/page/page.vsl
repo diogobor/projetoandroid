@@ -1,5 +1,6 @@
-#set ($generatedFile = "${page.fullPath}.java")
+#set ($generatedFile = "${page.name}.xml")
 <?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout
   xmlns:android="http://schemas.android.com/apk/res/android"
   android:orientation="vertical"
@@ -9,7 +10,7 @@
   <TextView  
 		    android:layout_width="fill_parent" 
 		    android:layout_height="wrap_content" 
-		    android:text="@string/titulo.${page.title}"
+		    android:text="@string/titulo.${page.name}"
 		/>
 	<HorizontalScrollView 
     	android:layout_width="fill_parent" 
@@ -22,12 +23,12 @@
 					android:id="@+id/TableLayout${count}" 
 					android:layout_width="fill_parent" 
 					android:layout_height="wrap_content">
-  #foreach($parameter in $page.parameters)
-  	#if(${parameter.type}.equals("Collection"))
+  #foreach($parameter in $page.allFormFields)
+  	#if($parameter.type.name.equals("Collection"))
   	#else
   		#set($count = $count + 1)
   				<TableRow 
-						android:id="@+id/TableRow${count}" 
+						android:id="@+id/TableRowCampos${count}" 
 						android:layout_width="fill_parent" 
 						android:layout_height="wrap_content">
 						<TextView  
@@ -45,8 +46,23 @@
   	#end
   #end
   				</TableLayout>
-  		#foreach($parameter in $page.parameters)
-  			#if(${parameter.type}.equals("Collection"))
+  		<TableRow 
+						android:id="@+id/TableRowBotoes${count}" 
+						android:layout_width="fill_parent" 
+						android:layout_height="wrap_content">
+		#foreach($button in $page.buttons)
+  		#set($count = $count + 1)						
+						<Button 
+							android:text="@string/$button" 
+							android:id="@+id/$button" 
+							android:layout_width="wrap_content" 
+							android:layout_height="wrap_content">
+							</Button>
+						
+  		#end
+  		</TableRow>
+  		#foreach($parameter in $page.incomingParameter)
+  			#if($parameter.type.name.equals("Collection"))
   			#set($count = $count + 1)
 		  		<TableLayout 
 					android:id="@+id/Tabela${count}" 
@@ -57,7 +73,7 @@
 						android:id="@+id/TableRow${count}" 
 						android:layout_width="fill_parent" 
 						android:layout_height="wrap_content">
-						#foreach($atributoTabela in $parameter.atributosTabela)
+						#foreach($atributoTabela in $page.atributosTabela)
 						<TextView  
 						    android:layout_width="wrap_content" 
 						    android:layout_height="wrap_content" 
