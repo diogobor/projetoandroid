@@ -34,7 +34,6 @@ public class AndroidControllerLogicImpl
      */
     protected java.lang.String handleGetFullPath()
     {
-    	System.out.println("*****************************************************************");
         return getFullyQualifiedName().replace(".", "/");
     }
 
@@ -69,6 +68,7 @@ public class AndroidControllerLogicImpl
      */
     protected java.lang.Object handleGetUc()
     {
+
         // TODO: add your implementation here!
         return null;
     }
@@ -83,19 +83,17 @@ public class AndroidControllerLogicImpl
     }
     protected java.util.Collection handleGetUniqueUCParameters()
     {
-		System.out.println("*****************************************************************");
-		System.out.println("Criei o arquivo!!!");
+
 		Collection resultParameters = new ArrayList();
     	List actions = getUseCase().getActions();
-    	System.out.println(actions.size());
+
     	for(Iterator it =actions.iterator();it.hasNext();){
     		FrontEndAction state = (FrontEndAction)it.next();
-    		System.out.println(state.getName());
     		List parameters = state.getForwardParameters();
     		for(Iterator it2 =parameters.iterator();it2.hasNext();){
     			boolean adicionar = true;
     			ParameterFacade param = (ParameterFacade)it2.next();
-    			System.out.println(param.getName());
+
     			for(Iterator it3 = resultParameters.iterator();it3.hasNext();){
     				if(param.getFullyQualifiedName().equals(((ParameterFacade)it3.next()).getFullyQualifiedName())){
     					adicionar=false;
@@ -108,7 +106,6 @@ public class AndroidControllerLogicImpl
     			
     		}
     	}
-    	System.out.println("*****************************************************************");
         return resultParameters;
     	
     }
