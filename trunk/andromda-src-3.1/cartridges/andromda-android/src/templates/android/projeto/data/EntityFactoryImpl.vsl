@@ -15,15 +15,15 @@ public class ${entity.name}DAOImpl extends ${entity.name}DAO {
 	}
 	
 	public long insert(${entity.name} $stringUtils.lowerCase(${entity.name})){
-       return null;  
+       return db.insert(null, null, null);  
 	}
 		
 	public long update(${entity.name} $stringUtils.lowerCase(${entity.name})){  
-       return null;  
+       return db.update(null, null, null, null);   
    }  
 		 
    public int delete(long id){  
-       return null;  
+       return db.delete(null, null,null); 
    }  
 	 
    public List<${entity.name}> find${entity.name}(${entity.name}VO $stringUtils.lowerCase(${entity.name})VO){  
