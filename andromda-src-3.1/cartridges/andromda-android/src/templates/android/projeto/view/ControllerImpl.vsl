@@ -1,13 +1,15 @@
-#set ($generatedFile = "${controller.fullPath}.java")
+#set ($generatedFile = "${controller.packagePath}/${controller.name}Impl.java")
+
 package $controller.packageName;
 
+import ${controller.packageName}.form.${controller.name}Form;
 
-
-public class ConsultaPaisControleImpl extends ConsultaPaisControle{
+public class ${controller.name}Impl extends ${controller.name}{
 
 	#foreach($operation in $controller.operations)
-	public ${operation.returnType} ${operation.name}(${controller.nameForm} form){
-	#if(${operation.returnType}.equals("void"))
+	public ${operation.returnType.fullyQualifiedName} ${operation.name}(${controller.name}Form form){
+	//TODO
+	#if($operation.returnType.name.equals("void"))
 	#else
 		return null;
 	#end
