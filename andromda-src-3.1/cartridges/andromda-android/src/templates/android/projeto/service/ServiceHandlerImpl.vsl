@@ -1,5 +1,6 @@
-#if ($stringUtils.isNotBlank($service.packageName))
-package $service.packageName;
+#set ($generatedFile = "${service.name}HandlerImpl.java")
+#if($stringUtils.isNotEmpty($customTypesPackage))
+#set ($generatedFile = "${stringUtils.replace($customTypesPackage,'.','/')}/${servicePackageName}/${generatedFile}")
 #end
 
 import java.util.Collection;
