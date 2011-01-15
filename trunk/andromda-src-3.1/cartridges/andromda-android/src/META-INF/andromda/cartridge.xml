@@ -6,6 +6,7 @@
     <!-- cartridge-templateObject merge-point-->
 	<property reference="modelPackageName"/>
 	<property reference="controllerPackageName"/>
+	<property reference="servicePackageName"/>
     <property reference="customTypesPackage"/>
     <property reference="schemaDataBase"/>
     <property reference="dataBaseVersion"/>
@@ -248,7 +249,4 @@
             </modelElement>
         </modelElements>
     </template>  
-    
-    
-    
 </cartridge>
