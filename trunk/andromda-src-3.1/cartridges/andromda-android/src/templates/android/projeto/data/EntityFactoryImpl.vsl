@@ -1,3 +1,7 @@
+#set ($generatedFile = "${entity.name}.java")
+#if($stringUtils.isNotEmpty($customTypesPackage))
+#set ($generatedFile = "${stringUtils.replace($customTypesPackage,'.','/')}/${modelPackageName}/${generatedFile}")
+#end
 #if ($entity.packageName)
 package $entity.packageName;
 #end
