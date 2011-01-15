@@ -67,6 +67,21 @@
                 <value>Service</value>
                 <appliedOnElement>class</appliedOnElement>
             </element>
+            <element name="FRONT_END_USE_CASE">
+                <documentation>
+                    A use-case that participates in the front-end (or presentation-tier) processes.
+                </documentation>
+                <value>FrontEndUseCase</value>
+                <appliedOnElement>use-case</appliedOnElement>
+            </element>
+            <element name="FRONT_END_APPLICATION">
+                <documentation>
+                    The use-case flagged with this stereotype will be the application's starting point,
+                    you can only use this stereotype in combination with the <![CDATA[<<FrontEndUseCase>>]]> stereotype.
+                </documentation>
+                <value>FrontEndApplication</value>
+                <appliedOnElement>use-case</appliedOnElement>
+            </element>
         </elementGroup>
     </elements>
 </profile>

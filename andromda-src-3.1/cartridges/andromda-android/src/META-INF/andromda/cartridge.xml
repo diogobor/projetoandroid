@@ -139,8 +139,7 @@
         outlet="implView"
         overwrite="true">
     </template>
-    
-    <!-- Classes do projeto, camada de visão -->
+               <!-- Classes do projeto, camada de visão -->
     
     <template
         path="templates/android/projeto/view/Controller.vsl"
@@ -165,7 +164,7 @@
                 </type>
             </modelElement>
         </modelElements>
-    </template>
+    </template> 
     <template
         path="templates/android/projeto/view/form/Form.vsl"
         outputPattern="$generatedFile"
@@ -173,13 +172,12 @@
         overwrite="true">
         <modelElements variable="controller">
             <modelElement>
-                <type name="org.andromda.cartridges.bpm4struts.metafacades.StrutsController">
-                </type>
+                <type name="org.andromda.cartridges.android.metafacades.AndroidController"/>
             </modelElement>
         </modelElements>
     </template>
     
-    <!-- Classes do projeto, camada de dados -->
+            <!-- Classes do projeto, camada de dados -->
     
     <template
         path="templates/android/projeto/data/EntityAbstract.vsl"
@@ -220,4 +218,7 @@
         outlet="service-impls"
         overwrite="true">
     </template>  
+    
+    
+    
 </cartridge>
