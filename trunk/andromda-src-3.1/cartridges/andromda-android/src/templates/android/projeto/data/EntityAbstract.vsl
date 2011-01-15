@@ -1,0 +1,38 @@
+/**
+ * Attention: Generated source! Do not modify by hand!
+ */
+#if ($entity.packageName)
+package $entity.packageName;
+#end
+
+public abstract class ${entity.name}{
+
+	#foreach ( $attribute in $entity.attributes )
+		#set ($typeName = $attribute.type.fullyQualifiedName)
+		#if ($attribute.containsEmbeddedObject)
+			#set ($typeName = $attribute.type.fullyQualifiedEntityName)
+		#end
+	private $typeName $attribute.name;
+	#end
+	
+	#foreach ( $attribute in $entity.attributes )
+		#set ($typeName = $attribute.type.fullyQualifiedName)
+		#if ($attribute.containsEmbeddedObject)
+			#set ($typeName = $attribute.type.fullyQualifiedEntityName)
+		#end
+		
+		#if ($attribute.visibility != "private")
+		
+	$attribute.visibility $typeName ${attribute.getterName}(){
+		return ${attribute.name};
+	}
+	
+	$attribute.visibility void ${attribute.setterName}(${typeName} ${attribute.name}){
+		return this.$attribute.name = ${attribute.name};
+	}
+		
+		#end
+		
+	#end
+	
+}
