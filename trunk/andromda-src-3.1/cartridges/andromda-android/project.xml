@@ -8,9 +8,19 @@
     <issueTrackingUrl>${issue.tracking.location}/jira/BrowseProject.jspa?id=10011&amp;decorator=none</issueTrackingUrl>
     <developers>
         <developer>
+            <name>Bianca Munaro</name>
+            <id>bia</id>
+            <email>biacsf@gmail.com</email>
+        </developer>
+        <developer>
             <name>Diogo Borges</name>
             <id>diogobor</id>
             <email>diogobor@gmail.com</email>
+        </developer>
+        <developer>
+            <name>Erich Oliveira</name>
+            <id>erich</id>
+            <email>ericholiveira10@gmail.com</email>
         </developer>
     </developers>
     <dependencies>
@@ -54,12 +64,6 @@
         <dependency>
             <groupId>andromda</groupId>
             <artifactId>andromda-meta-cartridge</artifactId>
-            <version>${pom.currentVersion}</version>
-            <type>jar</type>
-        </dependency>
-        <dependency>
-            <groupId>andromda</groupId>
-            <artifactId>andromda-hibernate-cartridge</artifactId>
             <version>${pom.currentVersion}</version>
             <type>jar</type>
         </dependency>
