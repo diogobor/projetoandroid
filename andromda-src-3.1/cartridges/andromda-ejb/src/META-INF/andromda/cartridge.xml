@@ -350,32 +350,7 @@
                 <type name="org.andromda.cartridges.ejb.metafacades.EJBSessionFacade"/>
             </modelElement>
         </modelElements>
-    </template>
-    
-    <template
-        path="templates/ejb/ServiceHandler.vsl"
-        outputPattern="{0}/{1}Handler.java"
-        outlet="session-beans"
-        overwrite="true">
-        <modelElements variable="service">
-            <modelElement>
-                <type name="org.andromda.cartridges.ejb.metafacades.EJBSessionFacade"/>
-            </modelElement>
-        </modelElements>
-    </template>
-    <template
-        path="templates/ejb/ServiceHandlerImpl.vsl"
-        outputPattern="{0}/{1}HandlerImpl.java"
-        outlet="session-impls"
-        overwrite="false">
-        <modelElements variable="service">
-            <modelElement>
-                <type name="org.andromda.cartridges.ejb.metafacades.EJBSessionFacade"/>
-            </modelElement>
-        </modelElements>
-    </template>
-
-    
+    </template>   
     <template
         path="templates/ejb/SessionLocal.vsl"
         outputPattern="$generatedFile"
