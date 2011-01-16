@@ -407,7 +407,7 @@
                <property name="service-impls">${maven.andromda.android.cs.impl.dir}</property>
                <property name="apiView">${maven.andromda.android.api.view.dir}</property>
                <property name="implView">${maven.andromda.android.api.view.impl.dir}</property>
-               <property name="apiController">${maven.android.andromda.api.controller.dir}</property>
+               <property name="apiController">${maven.andromda.android.api.controller.dir}</property>
                <property name="controller">${maven.andromda.android.controller.dir}</property>
                <property name="impl">${maven.andromda.android.impl.dir}</property>
                
