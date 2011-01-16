@@ -10,6 +10,7 @@ package ${customTypesPackage}.${controllerPackageName};
 */
 import br.ufrj.dcc.api.controller.ConnectionDataBase;
 import br.ufrj.dcc.api.controller.ContextDataBase;
+import br.ufrj.dcc.api.controller.PersistenceValues;
 import br.ufrj.dcc.api.view.PageFacade;
 import br.ufrj.dcc.impl.controller.ConnectionDataBaseImpl;
 import br.ufrj.dcc.impl.controller.ContextDataBaseImpl;
