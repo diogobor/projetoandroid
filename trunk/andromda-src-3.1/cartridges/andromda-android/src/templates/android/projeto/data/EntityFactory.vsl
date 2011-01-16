@@ -73,10 +73,12 @@ public abstract class ${entity.name}DAO extends DAO {
 				
 				#if($target.many)
 					returnSQL += "${stringUtils.lowerCase(${stringUtils.getSubstringWithoutPlural(${target.name})})}_fk text not null,";
-					returnSQL += "FOREIGN KEY(${stringUtils.lowerCase(${stringUtils.getSubstringWithoutPlural(${target.name})})}_fk) REFERENCES ${stringUtils.upperCase(${stringUtils.getSubstringWithoutPlural(${target.name})})} (_id)";
+					returnSQL += "FOREIGN KEY(${stringUtils.lowerCase(${stringUtils.getSubstringWithoutPlural(${target.name})})}_fk) REFERENCES ${stringUtils.upperCase(${stringUtils.getSubstringWithoutPlural(${target.name})})}(_id),";
 				#end
 		#end
 	#end
+		if (returnSQL.length() > 0)  
+			returnSQL = returnSQL.substring (0, returnSQL.length() - 1); 
  		return returnSQL;
  	}
 #end
