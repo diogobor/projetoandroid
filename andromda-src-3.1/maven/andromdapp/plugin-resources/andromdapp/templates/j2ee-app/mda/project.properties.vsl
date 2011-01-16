@@ -65,6 +65,21 @@ maven.andromda.workflow.manual.dir=${maven.src.dir}/../../workflow/src
 maven.andromda.common.manual.dir=${maven.src.dir}/../../common/src/java
 maven.andromda.common.generated.dir=${maven.src.dir}/../../common/target/src
 
+maven.andromda.android.api.controller.dir=${maven.src.dir}/../../target/br/ufrj/dcc/api/controller
+maven.andromda.android.api.controller.impl.dir=${maven.src.dir}/../../target/br/ufrj/dcc/impl/controller
+maven.andromda.android.api.view.dir=${maven.src.dir}/../../target/br/ufrj/dcc/api/view
+maven.andromda.android.api.view.impl.dir=${maven.src.dir}/../../target/br/ufrj/dcc/impl/view
+maven.andromda.android.impl.dir=${maven.src.dir}/../../target/br/ufrj/dcc/impl
+
+maven.andromda.android.cd.dir=${maven.src.dir}/../../target
+maven.andromda.android.cd.impl.dir=${maven.src.dir}/../../src
+maven.andromda.android.cs.dir=${maven.src.dir}/../../target
+maven.andromda.android.cs.impl.dir=${maven.src.dir}/../../src
+maven.andromda.android.controller.dir=${maven.src.dir}/../../target
+
+maven.andromda.android.schema.name.db=SuporteDB
+maven.andromda.android.version.db=1
+
 #if ($hibernate || $spring)
 #if ($hibernate)
 # The hibernate transaction manager to use.
