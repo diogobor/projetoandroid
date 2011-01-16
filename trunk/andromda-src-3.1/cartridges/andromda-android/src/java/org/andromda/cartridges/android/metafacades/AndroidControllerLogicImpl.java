@@ -7,7 +7,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import org.andromda.metafacades.uml.FinalStateFacade;
 import org.andromda.metafacades.uml.FrontEndAction;
+import org.andromda.metafacades.uml.FrontEndUseCase;
 import org.andromda.metafacades.uml.ParameterFacade;
 
 
@@ -109,5 +111,15 @@ public class AndroidControllerLogicImpl
         return resultParameters;
     	
     }
+
+	protected Collection handleGetControllerTransitions() {
+		Collection resultado = new ArrayList();
+		Collection col  = getUseCase().getActivityGraph().getFinalStates();
+    	for(Iterator it = col.iterator();it.hasNext();){
+    		
+    		resultado.add(((FrontEndUseCase)getModel().findUseCaseByName(((FinalStateFacade)it.next()).getName())).getController());
+    	}
+		return resultado;
+	}
 
 }

@@ -29,6 +29,10 @@ public class AndroidPageLogicImpl
     }
 
 
+	public String getName() {
+		return super.getName().replace(" ", "");
+	}
+
 	protected Collection handleGetAtributosTabela() {
 		Collection resultado = new ArrayList();
 		Collection params = getIncomingParameter();
@@ -60,7 +64,6 @@ public class AndroidPageLogicImpl
 		Collection col= getOutgoing();
 		for(Iterator it = col.iterator();it.hasNext();){
 			FrontEndForward forw  = (FrontEndForward)it.next();
-			System.out.println(forw.getName());
 			if(forw.isTriggerPresent()){
 				resultado.add(forw.getTrigger().getName());
 			}
