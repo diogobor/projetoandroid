@@ -60,7 +60,7 @@ public abstract class ${entity.name}DAO extends DAO {
 	}
 	
 	public static String getEndSQL(){
- 		return ");"
+ 		return ");";
  	}
  	
 #if($foreignKey)
