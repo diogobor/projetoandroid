@@ -5,7 +5,7 @@
         <artifactId>andromda-cartridges</artifactId>
         <version>3.1-SNAPSHOT</version>
     </parent>
-    <artifactId>andromda-android-cartridge</artifactId>
+    <artifactId>andromda-android-cartridge-coppetec</artifactId>
     <packaging>jar</packaging>
     <name>AndroMDA Android Cartridge</name>
     <description>Produces Entity from a model.</description>
