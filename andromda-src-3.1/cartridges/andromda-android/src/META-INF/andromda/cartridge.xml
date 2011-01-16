@@ -1,7 +1,7 @@
 <cartridge>
 
     <!-- define the template objects that are made available to the template -->
-    <templateObject name="stringUtils" className="org.apache.commons.lang.StringUtils"/>
+    <templateObject name="stringUtils" className="org.andromda.utils.StringUtilsHelper"/>
     
     <!-- cartridge-templateObject merge-point-->
 	<property reference="modelPackageName"/>
