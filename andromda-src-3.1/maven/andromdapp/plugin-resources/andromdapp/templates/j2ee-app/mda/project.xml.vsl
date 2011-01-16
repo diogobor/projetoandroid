@@ -70,7 +70,7 @@
         <!-- Specify and configure our cartridges -->
         <dependency>
             <groupId>andromda</groupId>
-            <artifactId>andromda-android-cartridge-coppetec</artifactId>
+            <artifactId>andromda-android-cartridge</artifactId>
             <version>${cartridge.version}</version>
             <type>jar</type>
         </dependency>
