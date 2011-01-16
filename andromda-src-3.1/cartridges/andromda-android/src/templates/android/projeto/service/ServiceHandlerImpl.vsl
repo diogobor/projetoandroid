@@ -2,7 +2,9 @@
 #if($stringUtils.isNotEmpty($customTypesPackage))
 #set ($generatedFile = "${stringUtils.replace($customTypesPackage,'.','/')}/${servicePackageName}/${generatedFile}")
 #end
-
+#if ($stringUtils.isNotBlank($service.packageName))
+package $service.packageName;
+#end
 import java.util.Collection;
 #foreach ($dependencia in $service.sourceDependencies)
 import ${customTypesPackage}.vo.${dependencia.targetElement.name}VO;
@@ -16,7 +18,7 @@ public class ${service.name}HandlerImpl extends ${service.name}Handler{
 	#foreach ($dependencia in $service.sourceDependencies)
 	@Override
 	public Collection handleFilter(${dependencia.targetElement.name}VO $stringUtils.lowerCase(${dependencia.targetElement.name})VO) {
-
+		return null;
 	}
 
 	@Override
