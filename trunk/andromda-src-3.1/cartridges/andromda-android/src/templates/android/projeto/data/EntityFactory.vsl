@@ -13,7 +13,7 @@ package $entity.packageName;
 		#set ($target = $associationEnd.otherEnd)
 		#if ($target.navigable || ($associationEnd.child && $entity.foreignHibernateGeneratorClass))
 				
-				#if($target.many)
+				#if(!$target.many)
 					#set ($foreignKey = true)
 				#end
 		#end
@@ -26,7 +26,7 @@ import ${customTypesPackage}.vo.${entity.name}VO;
 public abstract class ${entity.name}DAO extends DAO {	
 
 	private static final String SCRIPT_DB_CREATE =  
-	       "create table if not exists ${stringUtils.upperCase(${entity.name})} (_id integer primary "+  
+	       "create table if not exists ${stringUtils.upperCase(${entity.name})}(_id integer primary "+  
 	       "key autoincrement, " + getAttributes() #if($foreignKey) + getForeignKeys() #end + getEndSQL();
 	
 	public ${entity.name}DAO() {
@@ -71,9 +71,9 @@ public abstract class ${entity.name}DAO extends DAO {
 		#set ($target = $associationEnd.otherEnd)
 		#if ($target.navigable || ($associationEnd.child && $entity.foreignHibernateGeneratorClass))
 				
-				#if($target.many)
-					returnSQL += "${stringUtils.lowerCase(${stringUtils.getSubstringWithoutPlural(${target.name})})}_fk text not null,";
-					returnSQL += "FOREIGN KEY(${stringUtils.lowerCase(${stringUtils.getSubstringWithoutPlural(${target.name})})}_fk) REFERENCES ${stringUtils.upperCase(${stringUtils.getSubstringWithoutPlural(${target.name})})}(_id),";
+				#if(!$target.many)
+					returnSQL += "${stringUtils.lowerCase(${target.name})}_fk text not null,";
+					returnSQL += "FOREIGN KEY(${stringUtils.lowerCase(${target.name})}_fk) REFERENCES ${stringUtils.upperCase(${target.name})}(_id),";
 				#end
 		#end
 	#end
