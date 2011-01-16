@@ -9,6 +9,15 @@
 #if ($entity.packageName)
 package $entity.packageName;
 #end
+#foreach ($associationEnd in $entity.associationEnds)
+		#set ($target = $associationEnd.otherEnd)
+		#if ($target.navigable || ($associationEnd.child && $entity.foreignHibernateGeneratorClass))
+				
+				#if($target.many)
+					#set ($foreignKey = true)
+				#end
+		#end
+#end	
 
 import java.util.List;
 import ${customTypesPackage}.vo.${entity.name}VO;
@@ -17,8 +26,8 @@ import ${customTypesPackage}.vo.${entity.name}VO;
 public abstract class ${entity.name}DAO extends DAO {	
 
 	private static final String SCRIPT_DB_CREATE =  
-	       "create table if not exists PrimeiraClasse (_id integer primary "+  
-	       "key autoincrement, " + getAttributes();
+	       "create table if not exists ${stringUtils.upperCase(${entity.name})} (_id integer primary "+  
+	       "key autoincrement, " + getAttributes() #if($foreignKey) + getForeignKeys() #end + getEndSQL();
 	
 	public ${entity.name}DAO() {
 		executeSQL(SCRIPT_DB_CREATE);
@@ -47,6 +56,28 @@ public abstract class ${entity.name}DAO extends DAO {
 	#end
 		if (returnSQL.length() > 0)  
 		returnSQL = returnSQL.substring (0, returnSQL.length() - 1);  	 	
-		return returnSQL + ");";
+		return returnSQL;
 	}
+	
+	public static String getEndSQL(){
+ 		return ");"
+ 	}
+ 	
+#if($foreignKey)
+	public static String getForeignKeys(){
+ 		String returnSQL = ",";
+ 		
+ 		#foreach ($associationEnd in $entity.associationEnds)
+		#set ($target = $associationEnd.otherEnd)
+		#if ($target.navigable || ($associationEnd.child && $entity.foreignHibernateGeneratorClass))
+				
+				#if($target.many)
+					returnSQL += "${stringUtils.lowerCase(${stringUtils.getSubstringWithoutPlural(${target.name})})}_fk text not null,";
+					returnSQL += "FOREIGN KEY(${stringUtils.lowerCase(${stringUtils.getSubstringWithoutPlural(${target.name})})}_fk) REFERENCES ${stringUtils.upperCase(${stringUtils.getSubstringWithoutPlural(${target.name})})} (_id)";
+				#end
+		#end
+	#end
+ 		return returnSQL;
+ 	}
+#end
 }
