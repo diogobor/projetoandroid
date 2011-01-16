@@ -65,7 +65,7 @@
             </properties>
         </namespace>
 #if ($ejb)
-        <namespace name="ejb">
+        <!--<namespace name="ejb">
             <properties>
             	<property name="jboss-config">jboss-config</property>
             	#if($modulos)
@@ -80,20 +80,20 @@
 		    	<property name="shared-messageDrivenClient-impls">${maven.andromda.core.ejb.manual.dir}</property>
 		    	<property name="shared-session-beans">${maven.andromda.core.ejb.generated.dir}</property>
 		    	<property name="shared-session-beans-impl">${maven.andromda.core.ejb.manual.dir}</property>
-		    	<property name="module-ejb-configuration">${maven.andromda.core.modulo.ejb.generated.dir}</property>
+		    	<property name="module-ejb-configuration">${maven.andromda.core.modulo.ejb.generated.dir}</property> --> <!--
 #if(!$securityEnabled)
 		    	<!-- uncomment to enable security
 #end
                 <property name="securityRealm">${application.id}</property>                
                 <property name="controleAcesso">${maven.andromda.core.ejb.generated.dir}</property> 
                 <property name="controleAcessoImpl">${maven.andromda.core.ejb.manual.dir}</property>     
-                <property name="pbi">${maven.andromda.core.ejb.generated.dir}</property>                           
+                <property name="pbi">${maven.andromda.core.ejb.generated.dir}</property>     -->                      
 #if(!$securityEnabled)
                 --> 
 #end
 		    	
 		#else
-				<property name="entity-beans">${maven.andromda.core.generated.dir}</property>
+				<!--<property name="entity-beans">${maven.andromda.core.generated.dir}</property>
 		    	<property name="entity-impls">${maven.andromda.core.manual.dir}</property>
 		    	<property name="session-beans">${maven.andromda.core.generated.dir}</property>
 		    	<property name="session-impls">${maven.andromda.core.manual.dir}</property>
@@ -103,27 +103,27 @@
 		    	<property name="shared-messageDrivenClient-impls">${maven.andromda.core.manual.dir}</property>
 		    	<property name="shared-session-beans">${maven.andromda.core.generated.dir}</property>
 		    	<property name="shared-session-beans-impl">${maven.andromda.core.manual.dir}</property>
-				<property name="ejb-configuration">${maven.andromda.core.generated.dir}</property>
+				<property name="ejb-configuration">${maven.andromda.core.generated.dir}</property>-->
 #if(!$securityEnabled)
 			    <!-- uncomment to enable security
 #end
-                <property name="securityRealm">${application.id}</property>                
+                <!--<property name="securityRealm">${application.id}</property>                
                 <property name="controleAcesso">${maven.andromda.core.generated.dir}</property> 
                 <property name="controleAcessoImpl">${maven.andromda.core.manual.dir}</property>     
-                <property name="pbi">${maven.andromda.core.generated.dir}</property>                           
+                <property name="pbi">${maven.andromda.core.generated.dir}</property>-->                           
 #if(!$securityEnabled)
                 --> 
 #end
 		    	
 		#end                    
-            </properties>
-        </namespace>
+        <!--    </properties>
+        </namespace>-->
 #elseif ($hibernate)
 
-        <namespace name="ejb">
-            <properties>
+<!--        <namespace name="ejb">
+            <properties>-->
                 #if($modulos)
-            		<property name="project-configuration">${maven.andromda.ejb.dir}</property>
+           <!-- 		<property name="project-configuration">${maven.andromda.ejb.dir}</property>
 			<property name="session-beans">${maven.andromda.core.modulo.ejb.generated.dir}</property>
 		    	<property name="session-impls">${maven.andromda.core.modulo.ejb.manual.dir}</property>
 		    	<property name="messageDriven-beans">${maven.andromda.core.modulo.ejb.generated.dir}</property>
@@ -132,19 +132,19 @@
 		    	<property name="shared-messageDrivenClient-impls">${maven.andromda.core.ejb.manual.dir}</property>
 		    	<property name="shared-session-beans">${maven.andromda.core.ejb.generated.dir}</property>
 		    	<property name="shared-session-beans-impl">${maven.andromda.core.ejb.manual.dir}</property>
-		    	<property name="module-ejb-configuration">${maven.andromda.core.modulo.ejb.generated.dir}</property>
+		    	<property name="module-ejb-configuration">${maven.andromda.core.modulo.ejb.generated.dir}</property>-->
 #if(!$securityEnabled)
 		    	<!-- uncomment to enable security
 #end
-                <property name="securityRealm">${application.id}</property>                
+                <!--<property name="securityRealm">${application.id}</property>                
                 <property name="controleAcesso">${maven.andromda.core.ejb.generated.dir}</property> 
                 <property name="controleAcessoImpl">${maven.andromda.core.ejb.manual.dir}</property>     
-                <property name="pbi">${maven.andromda.core.ejb.generated.dir}</property>                           
+                <property name="pbi">${maven.andromda.core.ejb.generated.dir}</property>-->                           
 #if(!$securityEnabled)
                 --> 
 #end
 		#else
-			<property name="session-impls">${maven.andromda.core.manual.dir}</property>
+			<!--<property name="session-impls">${maven.andromda.core.manual.dir}</property>
 			<property name="session-beans">${maven.andromda.core.generated.dir}</property>
 		    	<property name="messageDriven-beans">${maven.andromda.core.generated.dir}</property>
 		    	<property name="messageDriven-impls">${maven.andromda.core.manual.dir}</property>
@@ -152,22 +152,22 @@
 		    	<property name="shared-messageDrivenClient-impls">${maven.andromda.core.manual.dir}</property>
 		    	<property name="shared-session-beans">${maven.andromda.core.generated.dir}</property>
 		    	<property name="shared-session-beans-impl">${maven.andromda.core.manual.dir}</property>
-		    	<property name="ejb-configuration">${maven.andromda.core.generated.dir}</property>
+		    	<property name="ejb-configuration">${maven.andromda.core.generated.dir}</property>-->
 #if(!$securityEnabled)
 		    	<!-- uncomment to enable security
 #end
-                <property name="securityRealm">${application.id}</property>                
+                <!--<property name="securityRealm">${application.id}</property>                
                 <property name="controleAcesso">${maven.andromda.core.generated.dir}</property> 
                 <property name="controleAcessoImpl">${maven.andromda.core.manual.dir}</property>     
-                <property name="pbi">${maven.andromda.core.generated.dir}</property>                           
+                <property name="pbi">${maven.andromda.core.generated.dir}</property>-->                           
 #if(!$securityEnabled)
                 --> 
 #end
 		#end              
-            </properties>
-        </namespace>
+            <!--</properties>
+        </namespace>-->
         
-        <namespace name="hibernate">
+        <!--<namespace name="hibernate">
             <properties>
             <property name= "defaultHibernateGeneratorClass"> ${defaultHibernateGeneratorClass}</property>
 		<property name="hibernateJndiName">java:/hibernate/${application.id}SessionFactory</property>
@@ -204,16 +204,16 @@
                 <property name="configuration">${maven.andromda.core.generated.dir}</property>
                 #end
                 <property name="transfers">${maven.andromda.common.generated.dir}</property>
-                <property name="transfer-impls">${maven.andromda.common.manual.dir}</property>
+                <property name="transfer-impls">${maven.andromda.common.manual.dir}</property>-->
 #if(!$securityEnabled)
                 <!-- uncomment to enable security
 #end
-                <property name="securityRealm">${application.id}</property>
+                <!--<property name="securityRealm">${application.id}</property>-->
 #if(!$securityEnabled)
                 --> 
 #end
-            </properties>
-        </namespace>
+            <!--</properties>
+        </namespace>-->
 #else
         <namespace name="spring">
             <properties>
@@ -257,7 +257,7 @@
 #end
             </properties>
         </namespace>
-        <namespace name="hibernate">
+        <!--<namespace name="hibernate">
             <properties>
                 <property name="hibernateEnableCache">false</property>
                 <property name="hibernateEnableAssociationsCache">false</property>
@@ -271,7 +271,7 @@
                 <property name="compositionDefinesEagerLoading">true</property>
                 <property name="cache">${maven.andromda.core.dominio.generated.dir}</property>
             </properties>
-        </namespace>
+        </namespace>-->
 #end
 #if ($workflow)
         <namespace name="jbpm">
@@ -291,7 +291,7 @@
             <properties>
                 <property name="enumerations">${maven.andromda.common.generated.dir}</property>                
                 <property name="exceptions">${maven.andromda.common.generated.dir}</property>
-                <property name="value-objects">${maven.andromda.common.generated.dir}</property>
+                <!--<property name="value-objects">${maven.andromda.common.generated.dir}</property>-->
                 <property name="util">${maven.andromda.common.generated.dir}</property>
                 <property name="logger">${maven.andromda.common.generated.dir}</property>
 		    </properties>
@@ -396,5 +396,23 @@
             </properties>
         </namespace>
 #end
+ 		<namespace name="android">
+           <properties>
+               <property name="schemaDataBase">${maven.andromda.android.schema.name.db}</property>                
+               <property name="dataBaseVersion">${maven.andromda.android.version.db}</property>
+               <property name="entities">${maven.andromda.android.cd.dir}</property>
+               <property name="entity-impls">${maven.andromda.android.cd.impl.dir}</property>
+               <property name="implController">${maven.andromda.android.api.controller.impl.dir}</property>
+               <property name="services">${maven.andromda.android.cs.dir}</property>
+               <property name="service-impls">${maven.andromda.android.cs.impl.dir}</property>
+               <property name="apiView">${maven.andromda.android.api.view.dir}</property>
+               <property name="implView">${maven.andromda.android.api.view.impl.dir}</property>
+               <property name="apiController">${maven.android.andromda.api.controller.dir}</property>
+               <property name="controller">${maven.andromda.android.controller.dir}</property>
+               <property name="impl">${maven.andromda.android.impl.dir}</property>
+               
+               <property name="controllers">${maven.andromda.core.dominio.manual.dir}</property>
+           </properties>
+       </namespace>
     </namespaces>
 </andromda>
