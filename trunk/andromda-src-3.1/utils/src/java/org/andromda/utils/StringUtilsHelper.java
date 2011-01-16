@@ -557,4 +557,9 @@ public class StringUtilsHelper
         //   when comparing cartridge output zips)
         return LINE_SEPARATOR;
     }
+    public static String getSubstringWithoutPlural(String string)
+    {
+    	string = string.substring(0, string.length() - 1); 
+        return string;
+    }
 }
