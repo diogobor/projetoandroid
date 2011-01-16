@@ -1,15 +1,15 @@
-#set ($generatedFile = "${controller.fullPath}.java")
-package $controller.packageName;
+#set ($generatedFile = "${controller.packagePath}/${controller.name}.java")
+##package $controller.packageName;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
 import ${customTypesPackage}.R;
-import ${controller.packageName}.form.${controller.nameForm};
-#foreach ($ucTransition in $controller.ucTransitions)
-import ${ucTransition.fullyQualifiedName};
-import ${ucTransition.fullyQualifiedName}Impl;
+import ${controller.packageName}.form.${controller.name}Form;
+#foreach ($cTransition in $controller.controllerTransitions)
+import ${cTransition.fullyQualifiedName};
+import ${cTransition.fullyQualifiedName}Impl;
 #end
 import br.ufrj.dcc.api.view.ActionCommander;
 import br.ufrj.dcc.api.view.Button;
@@ -18,17 +18,19 @@ import br.ufrj.dcc.impl.view.PageFacadeImpl;
 import br.ufrj.dcc.impl.view.SessionImpl;
 
 public abstract class ${controller.name} {
-	${controller.nameForm} form = new ${controller.nameForm}();
-	#foreach($signal in controller.uc.signal)
+	${controller.name}Form form = new ${controller.name}Form();
+	#foreach($signal in $controller.useCase.signalList)
 	protected ActionCommander btn${signal.name} = new ActionCommander(){
 		public void action() {
 			 
 			PageFacade page = new PageFacadeImpl();
 			
 			#foreach($parameter in $signal.parameters)
-			form.set${parameter.name}(page.getInputText(String.valueOf(R.id.${parameter.name})).getValue();
+			form.set${parameter.name}(page.getInputText(String.valueOf(R.id.${parameter.name})).getValue());
 			#end
+			#if($stringUtils.isNotBlank($signal.nomeAcao))
 			${signal.nomeAcao}(form);
+			#end
 			
 			page.changePage(String.valueOf(
 					R.layout.${signal.nextPageName}));
@@ -43,8 +45,8 @@ public abstract class ${controller.name} {
 		PageFacade page = new PageFacadeImpl();
 		
 		page.changePage(String.valueOf(
-				R.layout.${controller.uc.firstPageName}));
-		#foreach($signal in controller.uc.signal)
+				R.layout.${controller.useCase.firstPage.name}));
+		#foreach($signal in $controller.uc.signal)
 		page.getButton(String.valueOf(R.id.${signal.name})).setAction(btn${signal.name});
 		#end
 		posInit();

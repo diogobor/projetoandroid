@@ -16,6 +16,22 @@
             <stereotype>FRONT_END_USE_CASE</stereotype>
         </mapping>
     </metafacade>
+    <metafacade class="org.andromda.cartridges.android.metafacades.AndroidPageLogicImpl">
+        <mapping class="org.omg.uml.behavioralelements.activitygraphs.ActionState$Impl">
+            <property name="frontEndView"/>
+            <property name="containedInFrontEndUseCase"/>
+        </mapping>
+    </metafacade>
+    <metafacade class="org.andromda.cartridges.android.metafacades.AndroidTriggerLogicImpl">
+        <mapping class="org.omg.uml.behavioralelements.statemachines.CallEvent$Impl">
+            <property name="containedInFrontEndUseCase"/>
+        </mapping>
+    </metafacade>
+    <metafacade class="org.andromda.cartridges.android.metafacades.AndroidTriggerLogicImpl">
+        <mapping class="org.omg.uml.behavioralelements.statemachines.SignalEvent$Impl">
+            <property name="containedInFrontEndUseCase"/>
+        </mapping>
+    </metafacade>
     <metafacade class="org.andromda.cartridges.android.metafacades.AndroidControllerPackageLogicImpl" contextRoot="true">
         <mapping class="org.omg.uml.foundation.core.UmlClass$Impl">
             <stereotype>ENTITY</stereotype>

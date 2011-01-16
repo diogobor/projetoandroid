@@ -5,8 +5,10 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
+import org.andromda.metafacades.uml.FrontEndAction;
 import org.andromda.metafacades.uml.FrontEndActionState;
 import org.andromda.metafacades.uml.ParameterFacade;
+import org.andromda.metafacades.uml.TransitionFacade;
 
 
 /**
@@ -71,5 +73,27 @@ public class AndroidUCLogicImpl
         // TODO: add your implementation here!
         return null;
     }
+	protected AndroidPage handleGetFirstPage() {
+		return (AndroidPage)getViews().get(0);
+	}
+
+	protected List handleGetSignalList() {
+		List resultado = new ArrayList();
+		List actions = getActions();
+		for(Iterator it = actions.iterator();it.hasNext();){
+			FrontEndAction action = (FrontEndAction)it.next();
+			List trs = action.getTransitions();
+			for(Iterator it2 = trs.iterator();it2.hasNext();){
+				TransitionFacade tr=(TransitionFacade)it2.next();
+				if(tr.getTrigger()!=null){
+					if(tr.getTrigger().getName()!=null && !tr.getTrigger().getName().equals("")){
+						resultado.add(tr.getTrigger());
+					}
+				}
+			}
+			
+		}
+		return resultado;
+	}
 
 }
