@@ -20,13 +20,15 @@ import br.ufrj.dcc.impl.view.SessionImpl;
 public abstract class ${controller.name} {
 	${controller.name}Form form = new ${controller.name}Form();
 	#foreach($signal in $controller.useCase.signalList)
+	#if($stringUtils.isNotBlank($signal.name))
+	#if(!$stringUtils.isNotBlank($signal.transition.findTaggedValue("@andromda.presentation.web.action.type")) || !$signal.transition.findTaggedValue("@andromda.presentation.web.action.type").equals("form"))
 	protected ActionCommander btn${signal.name} = new ActionCommander(){
 		public void action() {
 			 
 			PageFacade page = new PageFacadeImpl();
 			
 			#foreach($parameter in $signal.parameters)
-			form.set${parameter.name}(page.getInputText(String.valueOf(R.id.${parameter.name})).getValue());
+			form.set$stringUtils.capitalize(${parameter.name})(page.getInputText(String.valueOf(R.id.${parameter.name})).getValue());
 			#end
 			#if($stringUtils.isNotBlank($signal.nomeAcao))
 			${signal.nomeAcao}(form);
@@ -35,10 +37,13 @@ public abstract class ${controller.name} {
 			page.changePage(String.valueOf(
 					R.layout.${signal.nextPageName}));
 			
-			## Como vou preencher isso?????
-			preencherResultadoDaConsultaDePais(form);
+			#if($signal.temColecaoResultado)
+			preencher$stringUtils.capitalize(${signal.ColecaoResultado.name})(form.get$stringUtils.capitalize(${signal.ColecaoResultado.name})());
+			#end
 		}
 	};
+	#end
+	#end
 	#end
 	public void iniciar(){
 		preInit();
@@ -55,41 +60,47 @@ public abstract class ${controller.name} {
 	}
 	protected void posInit(){
 	}
-	## O que fazer com isso????
-	private void preencherResultadoDaConsultaDePais(ConsultaPaisUCForm form){
+	#foreach($signal in $controller.useCase.signalList)
+	#if($signal.temColecaoResultado)
+	#if($stringUtils.isNotBlank(${signal.trigger.name}))
+	public void preencher$stringUtils.capitalize(${signal.ColecaoResultado.name})(form){
 		try {
-			preencherGridPaises(form.getPaises());
-		} catch (Exception e) {
-			PageFacade page = new PageFacadeImpl();
-			page.showErrorMessage("Um erro foi encontrado na aplicação");
+				preencherGrid$stringUtils.capitalize(${signal.ColecaoResultado.name})(form.get$stringUtils.capitalize(${signal.ColecaoResultado.name})());
+			} catch (Exception e) {
+				PageFacade page = new PageFacadeImpl();
+				page.showErrorMessage("Um erro foi encontrado na aplicação");
+			}
 		}
-		
 	}
-	#foreach($operation in $controller.operations)
-		public abstract ${operation.returnType} ${operation.name}(${controller.nameForm} form);
 	#end
-	/*
-	public void preencherGridPaises(Collection paises) throws Exception{
-		//TODO
+	#elseif($signal.colecao)
+	public void preencherGrid$stringUtils.capitalize(${signal.colecao.name})(Collection ${signal.colecao.name}){
 		PageFacade page = new PageFacadeImpl();
 		List<Button[]> botoes = new ArrayList<Button[]>();
-		
-		for(final Object pais : paises){
-			Button[] arrayBotoes = new Button[1]; //Só tem o botão detalhar
-			Button button = page.createButton("detalhar");
-			arrayBotoes[0] = button;
-			button.setAction(new ActionCommander(){
+		for(final Object obj : ${signal.colecao.name}){
+		Button[] arrayBotoes = new Button[${signal.sinaisColecao.size()}];
+		#set($count=0)
+		#foreach($bot in ${signal.sinaisColecao})
+		Button button$count = page.createButton("$bot.name");
+		arrayBotoes[$count] = button$count;
+		button${count}.setAction(new ActionCommander(){
 				public void action() {
-					SessionImpl.instance().put(PageFacade.TABLE_ACTION_KEY, pais );
-					DetalhaPaisControle controle = new DetalhaPaisControleImpl();
+					SessionImpl.instance().put(PageFacade.TABLE_ACTION_KEY, obj );
+					$bot.trigger.targetUseCase.controller.name controle = new ${bot.trigger.targetUseCase.controller.name}Impl();
 					controle.iniciar();
 				}
 			});
+		#set($count=$count+1)	
+		#end
 			botoes.add(arrayBotoes);
 		}
-		page.createTable(String.valueOf(R.id.Tabela01)
-				, paises, botoes, "valor","codigo");
-
-	}*/
+		page.createTable( ${signal.colecao.name}, botoes);
+	}
+	#end
+	#end
+	#foreach($operation in $controller.operations)
+	public abstract ${operation.returnType.fullyQualifiedName} ${operation.name}(${controller.name}Form form);
+	
+	#end
 	
 }
