@@ -45,7 +45,7 @@
 					</TableRow>
   	#end
   #end
-  				</TableLayout>
+  				
   		<TableRow 
 						android:id="@+id/TableRowBotoes${count}" 
 						android:layout_width="fill_parent" 
@@ -61,6 +61,7 @@
 						
   		#end
   		</TableRow>
+  		</TableLayout>
   		#foreach($parameter in $page.incomingParameter)
   			#if($parameter.type.name.equals("Collection"))
   			#set($count = $count + 1)

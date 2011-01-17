@@ -86,9 +86,7 @@ public class AndroidUCLogicImpl
 			for(Iterator it2 = trs.iterator();it2.hasNext();){
 				TransitionFacade tr=(TransitionFacade)it2.next();
 				if(tr.getTrigger()!=null){
-					if(tr.getTrigger().getName()!=null && !tr.getTrigger().getName().equals("")){
-						resultado.add(tr.getTrigger());
-					}
+					resultado.add(tr.getTrigger());
 				}
 			}
 			

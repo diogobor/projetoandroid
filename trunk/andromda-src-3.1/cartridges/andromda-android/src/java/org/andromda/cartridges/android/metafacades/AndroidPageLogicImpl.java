@@ -65,7 +65,10 @@ public class AndroidPageLogicImpl
 		for(Iterator it = col.iterator();it.hasNext();){
 			FrontEndForward forw  = (FrontEndForward)it.next();
 			if(forw.isTriggerPresent()){
-				resultado.add(forw.getTrigger().getName());
+				String tag =(String)forw.getTrigger().getTransition().findTaggedValue("@andromda.presentation.web.action.type");
+				if(!(tag!=null && tag.equals("form"))){
+					resultado.add(forw.getTrigger().getName());
+				}
 			}
 		}
 		return resultado;
