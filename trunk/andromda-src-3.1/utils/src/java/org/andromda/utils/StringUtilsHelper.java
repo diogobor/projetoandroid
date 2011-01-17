@@ -562,4 +562,19 @@ public class StringUtilsHelper
     	string = string.substring(0, string.length() - 1); 
         return string;
     }
+    
+    
+    public static boolean getComparatorString(String str1, String str2){
+    	
+    	//str1 and str2 are equal.
+    	if(str1.compareTo(str2) == 0){
+    		return true;
+    	}
+    	else if (str1.compareTo(str2) < 0){ // str2 follows str1
+    		return false;
+    	}
+    	else {
+    		return true;
+    	}
+    }
 }
