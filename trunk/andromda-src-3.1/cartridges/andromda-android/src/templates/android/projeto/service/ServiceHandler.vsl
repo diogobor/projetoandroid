@@ -1,4 +1,4 @@
-#set ($generatedFile = "${service.name}Handler.java")
+#set ($generatedFile = "${service.name}.java")
 #if($stringUtils.isNotEmpty($customTypesPackage))
 #set ($generatedFile = "${stringUtils.replace($customTypesPackage,'.','/')}/${servicePackageName}/${generatedFile}")
 #end
