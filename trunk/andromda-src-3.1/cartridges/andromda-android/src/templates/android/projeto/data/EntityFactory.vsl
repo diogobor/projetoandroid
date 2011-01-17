@@ -13,7 +13,7 @@ package $entity.packageName;
 		#set ($target = $associationEnd.otherEnd)
 		#if ($target.navigable || ($associationEnd.child && $entity.foreignHibernateGeneratorClass))
 				
-				#if(!$target.many)
+				#if((!$target.many && $associationEnd.many) || (!$target.many && !$associationEnd.many && ${stringUtils.getComparatorString($associationEnd.name, $target.name)}))
 					#set ($foreignKey = true)
 				#end
 		#end
