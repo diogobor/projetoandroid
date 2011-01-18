@@ -46,8 +46,8 @@ public class PageFacadeImpl implements PageFacade{
 		
 	}
 
-	public void createTable(Collection elements,List<Button[]> buttons) throws Exception {
-		TableLayout t = new TableLayout(ActivityHandler.activity);
+	public void createTable(String tableId , Collection elements,List<Button[]> buttons) throws Exception {
+		TableLayout t = ActivityHandler.activity.findViewById(Long.parseLong(tableId));
 		int k=0;
 		for(final Object element : elements){
 			TableRow row = new TableRow(ActivityHandler.activity);
