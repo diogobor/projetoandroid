@@ -143,6 +143,7 @@
     </template>
                <!-- Classes do projeto, camada de visão -->
     
+    
     <template
         path="templates/android/projeto/view/Controller.vsl"
         outputPattern="$generatedFile"
@@ -150,7 +151,7 @@
         overwrite="true">
         <modelElements variable="controller">
             <modelElement>
-                <type name="org.andromda.cartridges.bpm4struts.metafacades.StrutsController">
+                <type name="org.andromda.cartridges.android.metafacades.AndroidController">
                 </type>
             </modelElement>
         </modelElements>
@@ -159,10 +160,22 @@
         path="templates/android/projeto/view/ControllerImpl.vsl"
         outputPattern="$generatedFile"
         outlet="controllers"
-        overwrite="true">
+        overwrite="false">
         <modelElements variable="controller">
             <modelElement>
-                <type name="org.andromda.cartridges.bpm4struts.metafacades.StrutsController">
+                <type name="org.andromda.cartridges.android.metafacades.AndroidController">
+                </type>
+            </modelElement>
+        </modelElements>
+    </template>
+    <template
+        path="templates/android/projeto/view/page/page.vsl"
+        outputPattern="$generatedFile"
+        outlet="controllers"
+        overwrite="true">
+        <modelElements variable="page">
+            <modelElement>
+                <type name="org.andromda.cartridges.android.metafacades.AndroidPage">
                 </type>
             </modelElement>
         </modelElements>
