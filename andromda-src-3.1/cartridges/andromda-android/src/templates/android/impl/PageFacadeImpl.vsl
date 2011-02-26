@@ -46,18 +46,18 @@ public class PageFacadeImpl implements PageFacade{
 		
 	}
 
-	public void createTable(String tableId , Collection elements,List<Button[]> buttons) throws Exception {
-		TableLayout t = ActivityHandler.activity.findViewById(Long.parseLong(tableId));
+	public void createTable(Collection elements,List<Button[]> buttons,String... fields) throws Exception {
+		TableLayout t = new TableLayout(ActivityHandler.activity);
 		int k=0;
 		for(final Object element : elements){
 			TableRow row = new TableRow(ActivityHandler.activity);
 			Method[] methods  = element.getClass().getMethods();
 			Method[] getters=new Method[buttons.get(0).length];
 			int methodIndex=0;
-			if(buttons!=null && !buttons.isEmpty()){
+			if(fields!=null){
 				for(int i=0;i<methods.length;i++){
-					for(int j=0;j<buttons.get(0).length;j++){
-						if(methods[i].getName().endsWith("get"+capitalize(buttons.get(0)[j].getText()))){
+					for(int j=0;j<fields.length;j++){
+						if(methods[i].getName().endsWith("get"+capitalize(fields[j]))){
 							getters[methodIndex++]=methods[i];
 						}
 					}

@@ -153,5 +153,14 @@ public class AndroidTriggerLogicImpl
 		}
 		return null;
 	}
+	protected java.util.Collection handleGetAtributosExibidos(){
+		Collection retorno = new ArrayList();
+		String tag = (String)getColecao().findTaggedValue("@andromda.presentation.view.table.columns");
+		String[]elementos = tag.split(",");
+		for(int i=0;i<elementos.length;i++){
+			retorno.add(elementos[i]);
+		}
+		return retorno;
+	}
 
 }

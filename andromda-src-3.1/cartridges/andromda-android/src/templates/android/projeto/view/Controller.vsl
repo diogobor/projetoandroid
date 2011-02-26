@@ -95,7 +95,7 @@ public abstract class ${controller.name} {
 			botoes.add(arrayBotoes);
 		}
 		## Aqui pode ser que eu tenha que voltar a utilizar varargs e passar os campos a serem exibidos utilizando o taggedValue
-		page.createTable("Tabela${signal.colecao.name}", ${signal.colecao.name}, botoes);
+		page.createTable("Tabela${signal.colecao.name}", ${signal.colecao.name}, botoes #foreach($atrib in $signal.atributosExibidos),"$atrib"#end);
 	}
 	#end
 	#end
