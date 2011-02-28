@@ -17,17 +17,17 @@ public class SessionImpl implements Session{
 		}
 		return instance;
 	}
-	@Override
+	
 	public Object get(Object key) {
 		return map.get(key);
 		
 	}
-	@Override
+	
 	public void put(Object key, Object value) {
 		map.put(key, value);
 		
 	}
-	@Override
+	
 	public void remove(Object key) {
 		map.remove(key);
 		
